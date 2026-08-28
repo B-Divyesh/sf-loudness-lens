@@ -60,12 +60,15 @@ Evidence from this repair:
 
 ## Deployment and known gaps
 
-Deploy `dist/site/` using the static work order configuration. The committed
-`staticwebapp.config.json` carries the security headers, immutable asset cache
-policy, known-route rewrites, and true 404 override required by the host.
-There is no application backend, payment flow, sign-in, AI feature, or
-third-party runtime dependency to configure.
+Deployed `dist/site/` through the factory static deployment configuration to
+`https://loudness-lens.sociobot.in` (Azure Static Web Apps deployment id
+`eff83fef-d07e-4f39-aa0d-76f1a5c6395b`). Live verification confirms the
+deployed bundle contains the `pagehide` demo cleanup, fingerprinted assets send
+`Cache-Control: public, max-age=31536000, immutable`, `/demo` returns 200,
+and an unknown path returns HTTP 404 with **Page not found — Loudness Lens**.
+The live host also sends CSP, HSTS, nosniff, referrer, and permissions-policy
+headers.
 
-No known product gaps remain from the verifier report. A static-host deployment
-should be checked after propagation for the response headers and 404 status,
-because those are host-applied policies rather than Vite-preview behavior.
+There is no application backend, payment flow, sign-in, AI feature, or
+third-party runtime dependency to configure. No known gaps remain from the
+verifier report.
