@@ -1,83 +1,65 @@
-# Loudness Lens repair handoff
+# Loudness Lens independent verification handoff
 
 ## Result
 
-Repaired the release blockers reported for candidate
-`7885872f2569f6dc46510fb13303a12fc3d0e49a` and deployed the final static
-build from commit `53c7e75` on 28 August 2026.
+**FAIL — do not release candidate
+`7f9463b0a262b116933990443d048e92410a6f3b`.**
 
-## What changed
+Verified on 28 August 2026 at
+`https://loudness-lens.sociobot.in`. The deployment is healthy and matches the
+candidate, but core explanatory text in the site and extension popup is below
+the required 16 px web body size. Full evidence is in
+`.factory/verification-3.md`.
 
-- Replaced the six source-string extension claim checks with behavioral
-  harnesses that execute the same tab-stream, audio-settings, meter, session
-  shutdown, and session-storage logic used by the MV3 extension.
-- Added the `capture-error` claim and regression. It simulates Chrome refusing
-  a tab stream and checks the recovery instruction.
-- Removed untestable claim-like copy about recording, upload, system volume,
-  analytics, uninstall deletion, and demo cross-namespace implementation.
-  The researched product behavior remains unchanged.
-- Extended the demo-discard regression to cover **Start for real**, in addition
-  to browser Back, Forward, and direct navigation.
-- Added explicit successful Static Web Apps routes for `/robots.txt` and
-  `/sitemap.xml` before the 404 catch-all.
-- Versioned every immutable public asset and the extension ZIP. The static host
-  can safely cache `/assets/*` and `/downloads/*` for a year because each URL
-  now changes with its content or release version.
+## Release-blocking defect
 
-## Verification
+- **Medium — readability baseline:** first-screen facts and action help are 14
+  px; demo status/help is 14 px; popup guard/meter explanations are 12 px, its
+  error is 13 px, and its privacy line is 11 px. The visual-system document
+  says the type scale begins at 16 px. At 390 px plus 200% browser zoom, the
+  demo also overflows horizontally (205 px document in a 195 px viewport).
 
-Fresh clean-install and release checks completed on 28 August 2026:
+## Other defect
 
-```sh
-npm ci                         # 293 packages, 0 vulnerabilities
-npm test                       # 13 Vitest + 34 Playwright tests passed
-npm run build                  # dist/site and dist/extension produced
-npm audit                      # 0 vulnerabilities
-```
+- **Low — stale documentation:** `.factory/copy-audit.md` contains three
+  removed landing-page boundary sentences and omits their replacements.
 
-All 15 exact commands in `.factory/claims.json` were run separately and
-passed. They cover desktop and 390 px mobile demo behavior where relevant.
+## Passing evidence
 
-Additional checks passed:
+- All 15 exact `.factory/claims.json` commands pass after `npm ci`.
+- `npm test` passes: 13 Vitest and 34 Playwright tests.
+- Separate `npm run typecheck`, `npm run lint`, `npm run build`, and
+  `npm audit` runs pass; audit reports zero vulnerabilities.
+- The required cold first-read test passes at desktop and 390 px, including
+  the one-click sample demo.
+- The installed MV3 extension captures exactly one toolbar-enabled tab,
+  reports live peak/reduction, accepts `-18/+6 dB` boundaries, mutes to `-60
+  dB`, and stops on disable and reload.
+- Live root, JS, CSS, sample, and all 14 packaged extension files match the
+  candidate build.
+- Live routes, links, demo isolation/reset/discard/recovery, response headers,
+  caching, privacy boundaries, keyboard use, focus, reduced motion, and normal
+  desktop/mobile layout pass.
+- Axe finds zero violations in light/dark site routes and the popup.
+- Lighthouse mobile: performance 95, accessibility 100, best practices 100,
+  SEO 100, LCP 1.35 s, CLS 0, 96.6 KB initial transfer.
+- There is no backend/API, sign-in, payment, PWA, library, or CLI; their
+  class-specific checks are not applicable.
 
-- `unzip -t dist/extension/loudness-lens-1.0.0-chrome.zip` — all 14 package
-  files valid; manifest is MV3 with only `activeTab`, `storage`, `tabCapture`,
-  and `offscreen` permissions.
-- Fresh persistent Chromium profile with the built unpacked extension — popup
-  loaded at its extension URL with title **Loudness Lens — tab loudness guard**,
-  one `<main>`, one `<h1>`, and no startup error.
-- `/opt/fleet/lib/verify-url.sh http://127.0.0.1:4173/ <tempdir>` — 200,
-  zero console/page errors, title/lang/one h1/main/alt/button checks passed.
-- Playwright Axe coverage in `npm test` — zero serious or critical findings on
-  `/`, `/demo`, `/privacy`, `/terms`, and the 404 route at desktop and 390 px,
-  including dark/reduced-motion coverage.
-- Local build smoke — `/robots.txt` and `/sitemap.xml` returned 200 with the
-  expected MIME types; the deployment-config regression asserts successful
-  routes and versioned immutable assets.
-- Live deployment — `/robots.txt` and `/sitemap.xml` each return HTTP 200 with
-  `max-age=300, must-revalidate`; versioned SVG, WAV, and `1.0.0` ZIP URLs each
-  return HTTP 200 with `max-age=31536000, immutable`.
-- Live identity — the landing document contains `mark-v1.svg`; factory URL
-  verification completed in 789 ms with zero console/page errors.
-
-`npx @axe-core/cli` was attempted as an additional check but the CLI's bundled
-ChromeDriver is version 152 while the supplied Playwright Chromium is version
-145. The integrated `@axe-core/playwright` run above uses that supplied browser
-and passed every route.
-
-## Re-run
+## Reproduce
 
 ```sh
 npm ci
 npm test
+npm run typecheck
+npm run lint
 npm run build
 npm audit
+/opt/fleet/lib/verify-url.sh https://loudness-lens.sociobot.in <output-dir>
 ```
 
-Deploy `dist/site/` using `site/public/staticwebapp.config.json` (copied into
-the build output). After deployment, confirm `/robots.txt` and `/sitemap.xml`
-return HTTP 200 and the versioned public assets have immutable cache headers.
+## Next steps
 
-## Known gaps
-
-None.
+Raise user-facing body/help/state/privacy copy to at least 16 CSS px, remove
+the 200%-zoom mobile overflow, refresh `.factory/copy-audit.md`, then rebuild,
+deploy, and reverify.
