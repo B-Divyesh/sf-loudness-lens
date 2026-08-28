@@ -15,4 +15,4 @@ for (let i = 0; i < samples; i += 1) {
   const envelope = Math.min(1, t * 4, (duration - t) * 4);
   bytes.writeInt16LE(Math.max(-32767, Math.min(32767, (phrase + peak) * envelope * 32767)), 44 + i * 2);
 }
-writeFileSync(new URL('../site/public/assets/sample-lesson.wav', import.meta.url), bytes);
+writeFileSync(new URL('../site/public/assets/sample-lesson-v1.wav', import.meta.url), bytes);

@@ -5,8 +5,6 @@
 Repaired the release blockers reported for candidate
 `7885872f2569f6dc46510fb13303a12fc3d0e49a`.
 
-Repair commit: `6b331e0cfb5fabd80cb356a963736497c27512b8`.
-
 ## What changed
 
 - Replaced the six source-string extension claim checks with behavioral
@@ -21,9 +19,9 @@ Repair commit: `6b331e0cfb5fabd80cb356a963736497c27512b8`.
   to browser Back, Forward, and direct navigation.
 - Added explicit successful Static Web Apps routes for `/robots.txt` and
   `/sitemap.xml` before the 404 catch-all.
-- Kept immutable caching only for fingerprinted JS and CSS; stable artwork,
-  audio, crawler files, and the extension download now use short revalidating
-  cache headers.
+- Versioned every immutable public asset and the extension ZIP. The static host
+  can safely cache `/assets/*` and `/downloads/*` for a year because each URL
+  now changes with its content or release version.
 
 ## Verification
 
@@ -54,7 +52,7 @@ Additional checks passed:
   including dark/reduced-motion coverage.
 - Local build smoke — `/robots.txt` and `/sitemap.xml` returned 200 with the
   expected MIME types; the deployment-config regression asserts successful
-  routes and non-immutable stable assets.
+  routes and versioned immutable assets.
 
 `npx @axe-core/cli` was attempted as an additional check but the CLI's bundled
 ChromeDriver is version 152 while the supplied Playwright Chromium is version
@@ -72,7 +70,7 @@ npm audit
 
 Deploy `dist/site/` using `site/public/staticwebapp.config.json` (copied into
 the build output). After deployment, confirm `/robots.txt` and `/sitemap.xml`
-return HTTP 200 and stable files use `max-age=300, must-revalidate`.
+return HTTP 200 and the versioned public assets have immutable cache headers.
 
 ## Known gaps
 

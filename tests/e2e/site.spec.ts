@@ -23,7 +23,7 @@ test('@claim:sample-limiter plays the shipped sample through the limiter', async
 test('@claim:sample-timing ships a 12-second lesson with two loud intervals', async ({ page }) => {
   await page.goto('/demo');
   const sample = await page.evaluate(async () => {
-    const response = await fetch('/assets/sample-lesson.wav');
+    const response = await fetch('/assets/sample-lesson-v1.wav');
     const context = new AudioContext();
     const buffer = await context.decodeAudioData(await response.arrayBuffer());
     const channel = buffer.getChannelData(0);
@@ -79,7 +79,7 @@ test('@claim:demo-discard clears settings on browser history and direct navigati
 
 test('@claim:free-download provides the extension package without an account', async ({ page }) => {
   await page.goto('/');
-  const response = await page.request.get('/downloads/loudness-lens-chrome.zip');
+  const response = await page.request.get('/downloads/loudness-lens-chrome-1.0.0.zip');
   expect(response.ok()).toBeTruthy();
   expect((await response.body()).byteLength).toBeGreaterThan(20_000);
   await expect(page.getByRole('link', { name: 'Download Loudness Lens' })).toHaveAttribute('download', '');

@@ -43,7 +43,7 @@ The exact production build command is `npm run build`. It creates:
 - `dist/extension/chrome-mv3/` — unpacked MV3 extension
 - `dist/extension/loudness-lens-1.0.0-chrome.zip` — package archive
 - `dist/site/index.html` — static site root
-- `dist/site/downloads/loudness-lens-chrome.zip` — public download
+- `dist/site/downloads/loudness-lens-chrome-1.0.0.zip` — versioned public download
 
 `npm run build:site` performs the same deploy build and also packages the
 extension download into `dist/site/`.
