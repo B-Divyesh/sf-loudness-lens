@@ -1,4 +1,5 @@
 import { dbToGain, gainToDb, type GuardSettings } from '../../lib/audio';
+import { applyAudioSettings, closeAudioSession, readPeakDb } from '../../lib/audio-session';
 
 type Session = {
   context: AudioContext;
@@ -15,16 +16,13 @@ const sessions = new Map<number, Session>();
 
 function apply(session: Session, settings: GuardSettings) {
   session.settings = settings;
-  session.gain.gain.setTargetAtTime(settings.muted ? 0 : dbToGain(settings.inputGainDb), session.context.currentTime, 0.01);
-  session.limiter.port.postMessage({ ceiling: dbToGain(settings.ceilingDb) });
+  applyAudioSettings(settings, session.context.currentTime, session.gain.gain, session.limiter.port);
 }
 
 async function stop(tabId: number) {
   const session = sessions.get(tabId);
   if (!session) return;
-  window.clearInterval(session.timer);
-  session.stream.getTracks().forEach((track) => track.stop());
-  await session.context.close();
+  await closeAudioSession(session, window.clearInterval);
   sessions.delete(tabId);
 }
 
@@ -58,12 +56,9 @@ async function start(tabId: number, streamId: string, settings: GuardSettings) {
   };
   const samples = new Float32Array(analyser.fftSize);
   session.timer = window.setInterval(() => {
-    analyser.getFloatTimeDomainData(samples);
-    let peak = 0;
-    for (const sample of samples) peak = Math.max(peak, Math.abs(sample));
     void chrome.runtime.sendMessage({
       target: 'background', type: 'meter', tabId,
-      peakDb: gainToDb(peak), reductionDb: session.reductionDb,
+      peakDb: readPeakDb(analyser, samples.length), reductionDb: session.reductionDb,
     });
   }, 100);
   apply(session, settings);

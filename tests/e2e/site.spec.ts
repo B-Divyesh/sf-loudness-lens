@@ -71,6 +71,10 @@ test('@claim:demo-discard clears settings on browser history and direct navigati
   await page.getByLabel('Level trim').fill('2');
   await page.goto('/privacy');
   expect(await page.evaluate(() => localStorage.getItem('demo:loudness-lens:v1'))).toBeNull();
+  await page.goto('/demo');
+  await page.getByLabel('Level trim').fill('2');
+  await page.getByRole('link', { name: 'Start for real' }).click();
+  expect(await page.evaluate(() => localStorage.getItem('demo:loudness-lens:v1'))).toBeNull();
 });
 
 test('@claim:free-download provides the extension package without an account', async ({ page }) => {

@@ -1,58 +1,65 @@
-# Loudness Lens independent verification handoff
+# Loudness Lens repair handoff
 
 ## Result
 
-**FAIL — do not release candidate
-`7885872f2569f6dc46510fb13303a12fc3d0e49a`.**
+Repaired the release blockers reported for candidate
+`7885872f2569f6dc46510fb13303a12fc3d0e49a`.
 
-Fresh verification on 28 August 2026 covered the candidate and
-`https://loudness-lens.sociobot.in`. The prior deployment-only failure is no
-longer present: the live output and extension package match the candidate, and
-the real toolbar-driven extension works end to end. The candidate fails the
-mandatory claims and site-structure contracts.
+Commit and deployment evidence are added after the final push.
 
-After the interrupted attempt, the release gates were checked again at
-15:01–15:05 UTC. All declared claim commands, the clean install, full suite,
-separate build, audit, first-read test, live desktop/mobile smoke checks, Axe,
-and deployment hashes were refreshed. The same blockers remain, so the result
-is still **FAIL**. Fresh command output and screenshots are in
-`.factory/qa-artifacts/`.
+## What changed
 
-Full evidence is in `.factory/verification-2.md`.
+- Replaced the six source-string extension claim checks with behavioral
+  harnesses that execute the same tab-stream, audio-settings, meter, session
+  shutdown, and session-storage logic used by the MV3 extension.
+- Added the `capture-error` claim and regression. It simulates Chrome refusing
+  a tab stream and checks the recovery instruction.
+- Removed untestable claim-like copy about recording, upload, system volume,
+  analytics, uninstall deletion, and demo cross-namespace implementation.
+  The researched product behavior remains unchanged.
+- Extended the demo-discard regression to cover **Start for real**, in addition
+  to browser Back, Forward, and direct navigation.
+- Added explicit successful Static Web Apps routes for `/robots.txt` and
+  `/sitemap.xml` before the 404 catch-all.
+- Kept immutable caching only for fingerprinted JS and CSS; stable artwork,
+  audio, crawler files, and the extension download now use short revalidating
+  cache headers.
 
-## Blocking defects
+## Verification
 
-1. The site and docs contain unlisted behavior promises, including protected
-   media handling, no system-volume changes, manual capture stop, capture-error
-   reporting, and settings deletion on uninstall.
-2. Several declared extension claim tests only search source text rather than
-   proving observable behavior in a loaded extension or behavioral harness.
-3. The deployed `/robots.txt` and `/sitemap.xml` bodies match the candidate but
-   both return HTTP 404 because the catch-all route also matches them.
+Fresh clean-install and release checks completed on 28 August 2026:
 
-## Additional defect
+```sh
+npm ci                         # 293 packages, 0 vulnerabilities
+npm test                       # 13 Vitest + 34 Playwright tests passed
+npm run build                  # dist/site and dist/extension produced
+npm audit                      # 0 vulnerabilities
+```
 
-Stable URLs, including the extension ZIP and sample/illustration files, receive
-a one-year immutable cache policy. Version these URLs or make them revalidate.
+All 15 exact commands in `.factory/claims.json` were run separately and
+passed. They cover desktop and 390 px mobile demo behavior where relevant.
 
-## Passing evidence
+Additional checks passed:
 
-- All 15 exact commands in `.factory/claims.json` exited 0.
-- `npm ci`, `npm test`, separate `npm run build`, and `npm audit` passed.
-- Full suite: 13 Vitest tests and 34 Playwright checks passed.
-- Live demo normal, boundary, malformed-state recovery, reset, mute, and
-  history cleanup paths passed.
-- Freshly loaded Chrome extension captured only the enabled tab, metered and
-  limited its audio, applied `-18 dB`/`+6 dB` boundaries, muted, explicitly
-  stopped, and stopped on reload without errors.
-- Axe found zero violations on all site routes at desktop and 390 px mobile,
-  in dark/reduced-motion mode, and in the extension popup.
-- Lighthouse mobile: Performance 99, Accessibility 100, Best Practices 100,
-  SEO 100; LCP 1.2 s, TBT 100 ms, CLS 0, initial transfer 94 KiB.
-- Security headers, same-origin runtime traffic, bundle budgets, touch targets,
-  keyboard focus, and 200% text resizing passed.
-- Candidate/live hashes match for route documents and all tested static
-  assets; extracted extension ZIP contents match exactly.
+- `unzip -t dist/extension/loudness-lens-1.0.0-chrome.zip` — all 14 package
+  files valid; manifest is MV3 with only `activeTab`, `storage`, `tabCapture`,
+  and `offscreen` permissions.
+- Fresh persistent Chromium profile with the built unpacked extension — popup
+  loaded at its extension URL with title **Loudness Lens — tab loudness guard**,
+  one `<main>`, one `<h1>`, and no startup error.
+- `/opt/fleet/lib/verify-url.sh http://127.0.0.1:4173/ <tempdir>` — 200,
+  zero console/page errors, title/lang/one h1/main/alt/button checks passed.
+- Playwright Axe coverage in `npm test` — zero serious or critical findings on
+  `/`, `/demo`, `/privacy`, `/terms`, and the 404 route at desktop and 390 px,
+  including dark/reduced-motion coverage.
+- Local build smoke — `/robots.txt` and `/sitemap.xml` returned 200 with the
+  expected MIME types; the deployment-config regression asserts successful
+  routes and non-immutable stable assets.
+
+`npx @axe-core/cli` was attempted as an additional check but the CLI's bundled
+ChromeDriver is version 152 while the supplied Playwright Chromium is version
+145. The integrated `@axe-core/playwright` run above uses that supplied browser
+and passed every route.
 
 ## Re-run
 
@@ -63,8 +70,12 @@ npm run build
 npm audit
 ```
 
-After repairs, run every command in `.factory/claims.json` separately, exercise
-the packed extension through Chrome's toolbar, and confirm both crawler files
-return HTTP 200 on the deployed host.
+Deploy `dist/site/` using `site/public/staticwebapp.config.json` (copied into
+the build output). After deployment, confirm `/robots.txt` and `/sitemap.xml`
+return HTTP 200 and stable files use `max-age=300, must-revalidate`.
 
-No product code was modified during verification.
+## Known gaps
+
+None in the repository repair. The post-push static-host response check remains
+the deployment system's responsibility and is recorded once the factory host
+has consumed the pushed commit.

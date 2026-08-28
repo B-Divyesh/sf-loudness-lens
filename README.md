@@ -5,7 +5,7 @@ Keep each browser tab at a predictable listening level.
 Loudness Lens is a free Chrome extension for mixed videos, lessons, and music.
 It captures only the tab you enable. A 10 ms look-ahead limiter reduces peaks,
 the live meter shows the result, and **Mute now** cuts the captured output.
-Audio is processed inside Chrome and is never recorded or uploaded.
+Audio is processed inside Chrome and stays in your browser.
 
 ## Try the sandbox
 
@@ -54,8 +54,8 @@ are in `.factory/design.md`.
 ## Browser limits and privacy
 
 Chrome can block capture on protected pages and internal browser pages. The
-extension reports that error and leaves the guard off. Closing or reloading a
-tab ends its capture. Loudness Lens has no backend, accounts, analytics, or
+extension shows a recovery error and leaves the guard off. Turning off,
+closing, or reloading a tab ends its capture. Loudness Lens has no account or
 third-party runtime assets. See `/privacy` and `/terms` on the site.
 
 ## Deploy

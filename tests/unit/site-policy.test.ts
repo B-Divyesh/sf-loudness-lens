@@ -1,11 +1,15 @@
 import { expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 
-it('ships immutable asset cache policy and a real static 404 response', () => {
+it('ships crawlable metadata, selective immutable assets, and a real static 404 response', () => {
   const config = JSON.parse(readFileSync('site/public/staticwebapp.config.json', 'utf8'));
   expect(config.routes).toEqual(expect.arrayContaining([
-    expect.objectContaining({ route: '/assets/*', headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }),
-    expect.objectContaining({ route: '/downloads/*', headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }),
+    expect.objectContaining({ route: '/robots.txt', headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } }),
+    expect.objectContaining({ route: '/sitemap.xml', headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } }),
+    expect.objectContaining({ route: '/assets/*.js', headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }),
+    expect.objectContaining({ route: '/assets/*.css', headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }),
+    expect.objectContaining({ route: '/assets/*', headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } }),
+    expect.objectContaining({ route: '/downloads/*', headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } }),
     expect.objectContaining({ route: '/demo', rewrite: '/index.html' }),
     expect.objectContaining({ route: '/privacy', rewrite: '/index.html' }),
     expect.objectContaining({ route: '/terms', rewrite: '/index.html' }),

@@ -1,13 +1,17 @@
-import { DEFAULT_SETTINGS, clampSettings, type GuardSettings } from '../lib/audio';
+import {
+  captureStartError,
+  defaultGuardState,
+  persistGuardState,
+  requestTabStream,
+  shouldStopForTabUpdate,
+  stoppedGuardState,
+  tabStorageKey,
+  withMeter,
+  withSettings,
+  type GuardState,
+} from '../lib/extension-behavior';
 
-type TabState = {
-  enabled: boolean;
-  status: 'off' | 'starting' | 'on' | 'error';
-  settings: GuardSettings;
-  peakDb: number;
-  reductionDb: number;
-  error?: string;
-};
+type TabState = GuardState;
 
 const states = new Map<number, TabState>();
 const restored = chrome.storage.session.get(null).then((items) => {
@@ -17,17 +21,12 @@ const restored = chrome.storage.session.get(null).then((items) => {
 });
 
 function save(tabId: number) {
-  void chrome.storage.session.set({ [`tab:${tabId}`]: states.get(tabId) });
+  const state = states.get(tabId);
+  if (state) void persistGuardState(chrome.storage.session, tabId, state);
 }
 
 function stateFor(tabId: number): TabState {
-  return states.get(tabId) ?? {
-    enabled: false,
-    status: 'off',
-    settings: { ...DEFAULT_SETTINGS },
-    peakDb: -60,
-    reductionDb: 0,
-  };
+  return states.get(tabId) ?? defaultGuardState();
 }
 
 async function ensureOffscreen() {
@@ -58,13 +57,7 @@ async function enable(tabId: number) {
   await broadcast(tabId);
   try {
     await ensureOffscreen();
-    const streamId = await new Promise<string>((resolve, reject) => {
-      chrome.tabCapture.getMediaStreamId({ targetTabId: tabId }, (id) => {
-        const failure = chrome.runtime.lastError;
-        if (failure) reject(new Error(failure.message));
-        else resolve(id);
-      });
-    });
+    const streamId = await requestTabStream(chrome.tabCapture, tabId, () => chrome.runtime.lastError?.message);
     const result = await chrome.runtime.sendMessage({
       target: 'offscreen', type: 'start', tabId, streamId, settings: state.settings,
     });
@@ -74,9 +67,7 @@ async function enable(tabId: number) {
     const message = error instanceof Error ? error.message : String(error);
     states.set(tabId, {
       ...stateFor(tabId), enabled: false, status: 'error',
-      error: message.includes('captur')
-        ? 'This tab cannot share audio. Try a normal video or music tab.'
-        : 'The guard could not start. Reload the tab, then try again.',
+      error: captureStartError(message),
     });
   }
   await broadcast(tabId);
@@ -85,7 +76,7 @@ async function enable(tabId: number) {
 async function disable(tabId: number) {
   await restored;
   await chrome.runtime.sendMessage({ target: 'offscreen', type: 'stop', tabId }).catch(() => undefined);
-  states.set(tabId, { ...stateFor(tabId), enabled: false, status: 'off', peakDb: -60, reductionDb: 0 });
+  states.set(tabId, stoppedGuardState(stateFor(tabId)));
   await broadcast(tabId);
 }
 
@@ -100,9 +91,9 @@ export default defineBackground(() => {
       return;
     }
     if (message.target === 'background' && message.type === 'settings') {
-      const state = stateFor(message.tabId);
-      const settings = clampSettings({ ...state.settings, ...message.settings });
-      states.set(message.tabId, { ...state, settings });
+      const state = withSettings(stateFor(message.tabId), message.settings);
+      const settings = state.settings;
+      states.set(message.tabId, state);
       save(message.tabId);
       void chrome.runtime.sendMessage({ target: 'offscreen', type: 'settings', tabId: message.tabId, settings });
       void broadcast(message.tabId);
@@ -111,7 +102,7 @@ export default defineBackground(() => {
     if (message.target === 'background' && message.type === 'meter') {
       const state = stateFor(message.tabId);
       if (state.enabled) {
-        states.set(message.tabId, { ...state, peakDb: message.peakDb, reductionDb: message.reductionDb });
+        states.set(message.tabId, withMeter(state, message.peakDb, message.reductionDb));
         void broadcast(message.tabId);
       }
     }
@@ -119,10 +110,10 @@ export default defineBackground(() => {
 
   chrome.tabs.onRemoved.addListener((tabId) => {
     states.delete(tabId);
-    void chrome.storage.session.remove(`tab:${tabId}`);
+    void chrome.storage.session.remove(tabStorageKey(tabId));
     void chrome.runtime.sendMessage({ target: 'offscreen', type: 'stop', tabId }).catch(() => undefined);
   });
   chrome.tabs.onUpdated.addListener((tabId, change) => {
-    if (change.status === 'loading' && stateFor(tabId).enabled) void disable(tabId);
+    if (shouldStopForTabUpdate(change, stateFor(tabId))) void disable(tabId);
   });
 });
