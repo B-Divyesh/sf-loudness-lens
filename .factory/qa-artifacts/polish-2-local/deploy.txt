@@ -1,0 +1,8 @@
+Command: /opt/fleet/lib/deploy-static.sh loudness-lens dist/site
+Static Web App: sf-loudness-lens
+Region: centralus
+Deployment ID: a457ee7e-c3dc-4ad5-8dc1-da0b544a2919
+Deployment status: Succeeded
+Custom domain status: Ready
+Live check: https://loudness-lens.sociobot.in returned 200
+Result: PASS

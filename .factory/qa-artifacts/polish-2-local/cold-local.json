@@ -1,0 +1,46 @@
+{
+  "home-mobile": {
+    "title": "Loudness Lens — keep browser volume steady",
+    "h1": "Keep every tab at a steady volume",
+    "labels": [
+      "A PER-TAB VOLUME GUARD",
+      "PEAK-LIMIT PREVIEW",
+      "THREE STEPS",
+      "LIMITS AND BROWSER CONSTRAINTS",
+      "CHROME EXTENSION · V1"
+    ],
+    "demoBanner": null,
+    "overflow": false,
+    "requestOrigins": [
+      "http://127.0.0.1:4183"
+    ]
+  },
+  "home-desktop": {
+    "title": "Loudness Lens — keep browser volume steady",
+    "h1": "Keep every tab at a steady volume",
+    "labels": [
+      "A PER-TAB VOLUME GUARD",
+      "PEAK-LIMIT PREVIEW",
+      "THREE STEPS",
+      "LIMITS AND BROWSER CONSTRAINTS",
+      "CHROME EXTENSION · V1"
+    ],
+    "demoBanner": null,
+    "overflow": false,
+    "requestOrigins": [
+      "http://127.0.0.1:4183"
+    ]
+  },
+  "demo-mobile": {
+    "title": "Demo — Loudness Lens",
+    "h1": "Control a sample tab",
+    "labels": [
+      "SAMPLE COOKING LESSON · 12 SECONDS"
+    ],
+    "demoBanner": "Demo — sample data, nothing is saved\nReset demo\nDownload the extension ZIP",
+    "overflow": false,
+    "requestOrigins": [
+      "http://127.0.0.1:4183"
+    ]
+  }
+}

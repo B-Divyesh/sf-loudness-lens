@@ -1,0 +1,8 @@
+Fresh clone revision: 6f70d404c7c392b621c9fed74d9c864957713c6a
+Command: npm test
+Build: PASS; dist/site and dist/extension created
+TypeScript: PASS
+ESLint: PASS
+Vitest: PASS; 3 files, 16 tests
+Playwright: PASS; 52 tests across chromium and mobile
+Result: PASS

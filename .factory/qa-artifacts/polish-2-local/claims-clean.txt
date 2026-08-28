@@ -1,0 +1,23 @@
+Fresh clone: /tmp/loudness-lens-polish-2-clean.n9F7P4/repo
+Revision: 6f70d404c7c392b621c9fed74d9c864957713c6a
+Dependencies: npm ci; 292 packages installed; 0 vulnerabilities
+
+PASS local-only
+PASS sample-limiter
+PASS sample-timing
+PASS demo-isolation
+PASS demo-reset
+PASS demo-discard
+PASS free-download
+PASS peak-limit-marker
+PASS tab-consent
+PASS panic-mute
+PASS look-ahead-limiter
+PASS live-meter
+PASS level-trim
+PASS capture-lifecycle
+PASS local-settings
+PASS capture-error
+PASS minimum-chrome-version
+
+Result: every exact command in .factory/claims.json passed independently.

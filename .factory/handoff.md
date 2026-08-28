@@ -1,29 +1,80 @@
-# Loudness Lens review 2 handoff
+# Loudness Lens polish round 2 handoff
 
 ## Result
 
-Independent adversarial review completed without product-code changes. The report is `.factory/review-2.md`.
+PASS. All 17 findings from review 1 and both findings from review 2 are closed.
+The WXT Manifest V3 extension and static site remain the original artifact and
+deployment classes. No known product, test, accessibility, privacy, or
+deployment gap remains.
 
-**Verdict: FAIL — 2 minor findings.** The site is clear and demoable, all declared claims and quality tests pass, but the product is not at the required zero-finding standard.
+## What changed
 
-## Findings left
+- Added the `minimum-chrome-version` claim and a focused production-manifest
+  test for the documented Chrome 116 minimum.
+- Replaced three botanical mood labels with “Peak-limit preview,” “Three
+  steps,” and “Limits and browser constraints.” The product-specific field
+  guide artwork, palette, typography, specimen frames, and motion remain.
+- Added a browser regression test for all three new labels and the absence of
+  the old wording.
+- Updated `.factory/catalog-description.txt` to the 55-character, verb-first
+  sentence “Keep each Chrome tab at a predictable listening level.”
+- Updated the copy audit and recorded every cumulative finding in
+  `.factory/polish-2.md`.
 
-1. `F-2-1`: README promise “Chrome 116 or newer” lacks a matching claim entry and tagged test.
-2. `F-2-2`: Three landing section kickers are decorative rather than informative.
+## Exact verification
 
-## Verification completed
+- Repair commit: `6f70d404c7c392b621c9fed74d9c864957713c6a`.
+- Fresh clone: `/tmp/loudness-lens-polish-2-clean.n9F7P4/repo` at that exact
+  commit. `npm ci` installed 292 packages with 0 vulnerabilities.
+- Every command in `.factory/claims.json` ran separately: 17/17 passed.
+  Evidence: `.factory/qa-artifacts/polish-2-local/claims-clean.txt`.
+- Fresh-clone `npm test`: production build, TypeScript, ESLint, 16/16 Vitest
+  tests, and 52/52 Playwright tests passed. Evidence:
+  `.factory/qa-artifacts/polish-2-local/npm-test-clean.txt`.
+- Work-order build command `npm ci && npm test && npm run build:site` passed.
+  `dist/site/` and `dist/extension/` were produced. Evidence:
+  `.factory/qa-artifacts/polish-2-local/deploy-build.txt`.
+- Built initial site JavaScript is 15.40 KB raw / 5.50 KB gzip; CSS is 11.54
+  KB raw / 3.39 KB gzip. The mobile hero image is 21.34 KB. All are below the
+  static performance budgets.
+- Live route review covered `/`, `/demo`, `/privacy`, `/terms`, and a missing
+  route in fresh Chromium contexts at 390 × 844 and 195 × 844. Normal routes
+  returned 200; the missing route returned 404. All had one h1, one main,
+  `lang=en`, exact metadata, no overflow, no unexpected console errors, and
+  zero serious/critical Axe findings. Evidence:
+  `.factory/qa-artifacts/polish-2-live/review.json`.
+- Live demo `/?demo=1` showed the persistent sandbox banner, used only
+  `demo:loudness-lens:v1`, preserved a real-data sentinel, reset to 0 dB trim
+  and −6 dB limit, played the sample, and requested only the product origin.
+  Evidence: the `demo` object in the live review and
+  `.factory/qa-artifacts/polish-2-live/demo-mobile-cold.png`.
+- `/opt/fleet/lib/verify-url.sh` passed with a cold load of 883 ms and no page
+  or console errors. Evidence: `.factory/qa-artifacts/polish-2-live/verify.json`.
+- Live Lighthouse: performance 100, accessibility 100, best practices 100,
+  SEO 100; LCP 0.4 s, CLS 0, total blocking time 0 ms. Evidence:
+  `.factory/qa-artifacts/polish-2-live/lighthouse.json`.
+- Live ZIP: 50,455 bytes, files at the archive root, Manifest V3,
+  `minimum_chrome_version` 116, version 1.0.0.
 
-- Fresh live Chromium contexts at 390 × 844 and 1440 × 900 confirmed the cold first-read answers and one-click demo flow.
-- Live demo playback advanced and reported limiter reduction; the banner, reset, isolated `demo:loudness-lens:v1` storage, and same-origin request boundary were checked.
-- Fresh clone from `d154d1f`: `npm ci` passed; every one of the 16 exact `.factory/claims.json` commands passed; `npm test` passed (build, typecheck, lint, 15 Vitest, 50 Playwright).
-- Live route checks at 390 and 195 px confirmed titles, one h1/main, no horizontal overflow, and zero serious/critical Axe findings on normal routes. Link crawl passed; missing route returns designed HTTP 404.
-- All 17 findings from `review-1.md` were rechecked in live/source/tests and confirmed fixed.
+## Deployment
 
-## How to verify after repair
+- Command: `/opt/fleet/lib/deploy-static.sh loudness-lens dist/site`
+- Azure Static Web Apps deployment ID:
+  `a457ee7e-c3dc-4ad5-8dc1-da0b544a2919`
+- Live URL: `https://loudness-lens.sociobot.in`
+- Custom domain status: Ready; cold HTTPS root returned 200.
+
+## Run and verify
 
 ```sh
 npm ci
 npm test
+npm run build:site
 ```
 
-Then run the exact tagged command added for the Chrome-version claim, audit the three rewritten labels on the live landing page at 390 px, and repeat the full review checklist.
+The static deployment root is `dist/site/`. Load
+`dist/extension/chrome-mv3/` as an unpacked extension for local Chrome testing.
+
+## Known gaps and next steps
+
+None. Routine dependency and browser-version maintenance only.

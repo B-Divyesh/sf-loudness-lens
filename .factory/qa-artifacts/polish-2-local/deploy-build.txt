@@ -1,0 +1,9 @@
+Command: npm ci && npm test && npm run build:site
+Dependencies: PASS; 292 packages installed; 0 vulnerabilities
+Build: PASS
+TypeScript: PASS
+ESLint: PASS
+Vitest: PASS; 16 tests
+Playwright: PASS; 52 tests
+Final build: PASS; dist/site and dist/extension created
+Result: PASS
