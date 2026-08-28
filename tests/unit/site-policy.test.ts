@@ -1,5 +1,6 @@
 import { expect, it } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 
 it('ships crawlable metadata, versioned immutable assets, and a real static 404 response', () => {
   const config = JSON.parse(readFileSync('site/public/staticwebapp.config.json', 'utf8'));
@@ -23,4 +24,29 @@ it('ships crawlable metadata, versioned immutable assets, and a real static 404 
     'mark-v1.svg', 'sample-lesson-v1.wav',
   ]));
   expect(readFileSync('site/src/main.ts', 'utf8')).toContain('/downloads/loudness-lens-chrome-1.0.0.zip');
+});
+
+it('packages an installable extension folder at the ZIP root', () => {
+  const archive = 'dist/site/downloads/loudness-lens-chrome-1.0.0.zip';
+  const entries = execFileSync('unzip', ['-Z1', archive], { encoding: 'utf8' }).trim().split('\n');
+  expect(entries).toContain('manifest.json');
+  expect(entries).toContain('popup.html');
+  expect(entries.some((entry) => entry.startsWith('assets/'))).toBe(true);
+  const manifest = JSON.parse(execFileSync('unzip', ['-p', archive, 'manifest.json'], { encoding: 'utf8' }));
+  expect(manifest.manifest_version).toBe(3);
+  expect(manifest.name).toBe('Loudness Lens');
+});
+
+it('lists every claim once and connects it to exactly one tagged test', () => {
+  const claims = JSON.parse(readFileSync('.factory/claims.json', 'utf8')) as Array<{ id: string; test: string }>;
+  const sources = [
+    readFileSync('tests/e2e/site.spec.ts', 'utf8'),
+    readFileSync('tests/unit/audio.test.ts', 'utf8'),
+    readFileSync('tests/unit/extension.test.ts', 'utf8'),
+  ].join('\n');
+  expect(new Set(claims.map(({ id }) => id)).size).toBe(claims.length);
+  for (const claim of claims) {
+    expect(claim.test).toContain(`@claim:${claim.id}`);
+    expect(sources.split(`@claim:${claim.id}`).length - 1, claim.id).toBe(1);
+  }
 });

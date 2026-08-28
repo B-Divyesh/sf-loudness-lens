@@ -80,9 +80,12 @@ test('@claim:demo-discard clears settings on browser history and direct navigati
   await page.getByLabel('Level trim').fill('2');
   await page.goto('/privacy');
   expect(await page.evaluate(() => localStorage.getItem('demo:loudness-lens:v1'))).toBeNull();
-  await page.goto('/demo');
+  await page.goto('/?demo=1');
   await page.getByLabel('Level trim').fill('2');
-  await page.getByRole('link', { name: 'Start for real' }).click();
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('link', { name: 'Download the extension ZIP' }).click();
+  await downloadPromise;
+  await expect(page).toHaveURL(/\/$/);
   expect(await page.evaluate(() => localStorage.getItem('demo:loudness-lens:v1'))).toBeNull();
 });
 
@@ -95,20 +98,39 @@ test('@claim:free-download provides the extension package without an account', a
   await expect(page.locator('form')).toHaveCount(0);
 });
 
+test('@claim:peak-limit-marker updates the landing marker and mute state', async ({ page }) => {
+  await page.goto('/');
+  const preview = page.locator('.product-preview');
+  await expect(preview.locator('#preview-peak')).toHaveText('−18 dB');
+  await expect(preview.locator('.meter-note')).toContainText('Example reading: −18 dB');
+  await preview.getByRole('slider', { name: 'Peak limit' }).fill('-12');
+  await expect(preview.locator('.ceiling-readout')).toHaveText('−12 dB');
+  await expect(preview.locator('.meter-limit')).toHaveClass(/limit-12/);
+  await expect(preview.locator('.meter-note')).toContainText('−12 dB limit');
+  await preview.getByRole('button', { name: 'Mute now' }).click();
+  await expect(preview.getByRole('button', { name: 'Restore preview sound' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(preview.locator('.meter-note')).toHaveText('Preview muted. The example reading is paused.');
+  await preview.getByRole('button', { name: 'Restore preview sound' }).click();
+  await expect(preview.getByRole('button', { name: 'Mute now' })).toHaveAttribute('aria-pressed', 'false');
+});
+
 for (const route of ['/', '/demo', '/privacy', '/terms', '/missing']) {
   test(`page structure and accessibility: ${route}`, async ({ page }) => {
     const errors: string[] = [];
     page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
     page.on('pageerror', (error) => errors.push(error.message));
-    await page.goto(route);
-    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.locator('main')).toHaveCount(1);
-    await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page).toHaveTitle(/Loudness Lens/);
-    const results = await new AxeBuilder({ page: page as never }).analyze();
-    expect(results.violations.filter((item) => ['serious', 'critical'].includes(item.impact ?? ''))).toEqual([]);
+    for (const width of [390, 195]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto(route);
+      await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+      await expect(page.locator('main')).toHaveCount(1);
+      await expect(page.locator('h1')).toHaveCount(1);
+      await expect(page).toHaveTitle(/Loudness Lens/);
+      const results = await new AxeBuilder({ page: page as never }).analyze();
+      expect(results.violations.filter((item) => ['serious', 'critical'].includes(item.impact ?? '')), `${route} at ${width}px`).toEqual([]);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${route} at ${width}px`).toBeTruthy();
+    }
     expect(errors).toEqual([]);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   });
 }
 
@@ -118,12 +140,12 @@ test('keyboard navigation exposes the skip link and main action', async ({ page 
   await expect(page.getByRole('link', { name: 'Skip to main content' })).toBeFocused();
   await page.getByRole('link', { name: 'Try it with sample data' }).focus();
   await page.keyboard.press('Enter');
-  await expect(page).toHaveURL(/\/demo$/);
+  await expect(page).toHaveURL(/\/?demo=1$/);
   await expect(page.locator('h1')).toBeFocused();
 });
 
 test('link navigation away from the demo discards its separate settings', async ({ page }) => {
-  await page.goto('/demo');
+  await page.goto('/?demo=1');
   await page.getByLabel('Level trim').fill('3');
   await page.getByLabel('Footer navigation').getByRole('link', { name: 'Privacy' }).click();
   expect(await page.evaluate(() => localStorage.getItem('demo:loudness-lens:v1'))).toBeNull();
@@ -153,6 +175,69 @@ test('each route updates its canonical URL', async ({ page }) => {
   await page.getByLabel('Footer navigation').getByRole('link', { name: 'Privacy' }).click();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://loudness-lens.sociobot.in/privacy');
   await expect(page).toHaveTitle('Privacy — Loudness Lens');
+});
+
+test('each route sets exact page and sharing metadata', async ({ page }) => {
+  const routes: Array<[string, string, string, string]> = [
+    ['/', 'Loudness Lens — keep browser volume steady', 'Keep one browser tab at a steady level with a visible peak limit and a quick mute control.', 'https://loudness-lens.sociobot.in/'],
+    ['/demo', 'Demo — Loudness Lens', 'Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.', 'https://loudness-lens.sociobot.in/demo'],
+    ['/?demo=1', 'Demo — Loudness Lens', 'Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.', 'https://loudness-lens.sociobot.in/demo'],
+    ['/privacy', 'Privacy — Loudness Lens', 'Read what Loudness Lens stores, how tab audio stays on your device, and how demo data is separated and discarded.', 'https://loudness-lens.sociobot.in/privacy'],
+    ['/terms', 'Terms — Loudness Lens', 'Read the terms, browser limits, and listening-safety boundaries for the free Loudness Lens Chrome extension.', 'https://loudness-lens.sociobot.in/terms'],
+  ];
+  for (const [path, title, description, canonical] of routes) {
+    await page.goto(path);
+    await expect(page).toHaveTitle(title);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', description);
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', description);
+    await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute('content', description);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
+  }
+  await page.goto('/missing');
+  await expect(page).toHaveTitle('Page not found — Loudness Lens');
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', 'The requested Loudness Lens page was not found.');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
+  await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+});
+
+test('How it works navigation focuses, announces, and scrolls to the home content', async ({ page }) => {
+  await page.goto('/?demo=1');
+  await page.getByLabel('Main navigation').getByRole('link', { name: 'How it works' }).click();
+  await expect(page).toHaveURL(/\/#how$/);
+  await expect(page.locator('h1')).toBeFocused();
+  await expect(page.locator('#announcer')).toHaveText('Keep every tab at a steady volume');
+  await expect.poll(() => page.locator('#how').evaluate((node) => Math.abs(node.getBoundingClientRect().top))).toBeLessThan(2);
+});
+
+test('direct demo entry is isolated, resettable, and honest before playback', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('loudness-lens:real', 'keep'));
+  await page.goto('/?demo=1');
+  await expect(page.getByLabel('Demo mode')).toContainText('Demo — sample data, nothing is saved');
+  await expect(page.locator('.meter-note')).toHaveText('The sample is ready. Play it to see the peak.');
+  await page.getByLabel('Level trim').fill('4');
+  await page.getByRole('button', { name: 'Reset demo' }).click();
+  await expect(page.getByLabel('Level trim')).toHaveValue('0');
+  expect(await page.evaluate(() => localStorage.getItem('loudness-lens:real'))).toBe('keep');
+});
+
+test('the live download is paired with complete Chrome installation steps', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.install-steps li')).toHaveText([
+    'Download the ZIP.', 'Extract the ZIP.', 'Open chrome://extensions.',
+    'Turn on Developer mode.', 'Choose Load unpacked and select the extracted folder.',
+  ]);
+  const response = await page.request.get('/downloads/loudness-lens-chrome-1.0.0.zip');
+  expect(response.ok()).toBeTruthy();
+  expect((await response.body()).byteLength).toBeGreaterThan(20_000);
+});
+
+test('loaded demo controls remain usable when the network goes offline', async ({ page, context }) => {
+  await page.goto('/?demo=1');
+  await context.setOffline(true);
+  await page.getByRole('slider', { name: 'Peak limit' }).fill('-14');
+  await expect(page.locator('.ceiling-readout')).toHaveText('−14 dB');
+  await page.getByRole('button', { name: 'Mute now' }).click();
+  await expect(page.getByRole('button', { name: 'Restore sound' })).toBeVisible();
 });
 
 test('dark theme keeps serious accessibility findings at zero', async ({ page }) => {

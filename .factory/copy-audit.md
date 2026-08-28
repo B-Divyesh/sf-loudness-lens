@@ -1,67 +1,109 @@
-# Landing page copy audit
+# Copy audit
 
-Audited 28 August 2026. Counts treat hyphenated terms and version numbers as
-one word. Navigation labels, headings, captions, controls, and full sentences
-are included. No line exceeds 22 words. No line uses a banned word.
+Audited 28 August 2026 after polish round 1. Counts treat hyphenated terms,
+paths, URLs, and version numbers as one word. No sentence exceeds 22 words.
+No copy uses a banned marketing word.
 
-| Landing page copy | Words | Flag |
+## Landing page
+
+| Copy unit | Words | Result |
 | --- | ---: | --- |
-| Loudness Lens | 2 | — |
-| Demo | 1 | — |
-| How it works | 3 | — |
-| Privacy | 1 | — |
-| Download | 1 | — |
-| A field control for browser sound | 6 | — |
-| Keep every tab at a steady volume | 7 | — |
-| For people switching between videos, lessons, and music who want fewer sudden volume jumps. | 14 | — |
-| Try it with sample data | 6 | — |
-| Hear a local sample pass through the limiter. | 9 | — |
-| Audio never leaves your browser. | 5 | — |
-| No account or setup server. | 5 | — |
-| Free to use. | 3 | — |
-| Plate I · peaks kept below the bell | 7 | — |
-| The control in one glance | 5 | — |
-| See the peak before it surprises you | 7 | — |
-| The meter shows this tab’s level. | 6 | — |
-| The red mark shows your chosen limit. | 7 | — |
-| Specimen 01 · active tab | 4 | — |
-| Live peak | 2 | — |
-| A loud moment is approaching the −6 dB limit. | 9 | — |
-| Peak limit | 2 | — |
-| Mute now | 2 | — |
-| Three field notes | 3 | — |
-| How it works | 3 | — |
-| Open the tab | 3 | — |
-| Play the video, lesson, or song you want to guard. | 10 | — |
-| Turn on the guard | 4 | — |
-| The extension asks Chrome for that tab’s audio only. | 9 | — |
-| Set the peak limit | 4 | — |
-| Watch the meter. | 3 | — |
-| Use Mute now if sound feels unsafe. | 7 | — |
-| Clear boundaries | 2 | — |
-| What the guard does not do | 6 | — |
-| It starts only when you turn it on for a tab. | 11 | — |
-| It does not capture background tabs by itself. | 8 | — |
-| Some tabs cannot provide audio to Chrome extensions. | 8 | — |
-| It cannot guarantee a safe listening level. | 7 | — |
-| Chrome extension · v1 | 3 | — |
-| Put the guard beside your address bar | 7 | — |
-| Download the package, open Chrome extensions, and load the unpacked folder. | 11 | — |
-| Download Loudness Lens | 3 | — |
-| Keep each browser tab at a predictable listening level. | 9 | — |
-| Terms | 1 | — |
-| Built by Param Factory | 4 | — |
-| v1.0.0 · Original generated botanical artwork | 5 | — |
+| Loudness Lens | 2 | Pass |
+| Demo | 1 | Pass |
+| How it works | 3 | Pass |
+| Privacy | 1 | Pass |
+| Download | 1 | Pass |
+| A per-tab volume guard | 4 | Pass |
+| Keep every tab at a steady volume | 7 | Pass |
+| For people switching between videos, lessons, and music who want fewer sudden volume jumps. | 14 | Pass |
+| Try it with sample data | 6 | Pass |
+| Hear a sample stay below your chosen volume limit. | 9 | Pass |
+| Audio never leaves your browser. | 5 | Pass |
+| No account or server setup. | 5 | Pass |
+| Free to use. | 3 | Pass |
+| Plate I · peaks kept below the bell | 7 | Pass |
+| The control in one glance | 5 | Pass |
+| See the peak before it surprises you | 7 | Pass |
+| This preview starts with an example reading. | 7 | Pass |
+| Move the peak limit to place the red marker. | 9 | Pass |
+| Specimen 01 · active tab | 4 | Pass |
+| Live peak | 2 | Pass |
+| Example reading: −18 dB, below the −6 dB limit. | 9 | Pass |
+| Peak limit | 2 | Pass |
+| Mute now | 2 | Pass |
+| Three field notes | 3 | Pass |
+| How it works | 3 | Pass |
+| Open the tab | 3 | Pass |
+| Play the video, lesson, or song you want to guard. | 10 | Pass |
+| Turn on the guard | 4 | Pass |
+| The extension asks Chrome for that tab’s audio only. | 9 | Pass |
+| Set the peak limit | 4 | Pass |
+| Watch the meter. | 3 | Pass |
+| Use Mute now if sound feels unsafe. | 7 | Pass |
+| Clear boundaries | 2 | Pass |
+| What the guard does not do | 6 | Pass |
+| It starts only when you turn it on for a tab. | 11 | Pass |
+| It does not capture background tabs by itself. | 8 | Pass |
+| Some tabs cannot provide audio to Chrome extensions. | 8 | Pass |
+| It cannot guarantee a safe listening level. | 7 | Pass |
+| Chrome extension · v1 | 3 | Pass |
+| Put the guard beside your address bar | 7 | Pass |
+| Download the ZIP. | 3 | Pass |
+| Extract the ZIP. | 3 | Pass |
+| Open chrome://extensions. | 2 | Pass |
+| Turn on Developer mode. | 4 | Pass |
+| Choose Load unpacked and select the extracted folder. | 8 | Pass |
+| Download Loudness Lens | 3 | Pass |
+| Keep each browser tab at a predictable listening level. | 9 | Pass |
+| Terms | 1 | Pass |
+| Built by Param Factory ↗ external site | 7 | Pass |
+| v1.0.0 · Original generated botanical artwork | 5 | Pass |
 
-The first screen reads aloud in one breath: the seven-word job headline, the
-14-word audience sentence, and the six-word demo action state the job and next
-step without relying on the illustration.
+The first screen reads aloud in one breath: the job headline, audience
+sentence, sample action, and its immediate result are concrete and complete.
+
+## Demo and state copy
+
+| Copy unit | Words | Result |
+| --- | ---: | --- |
+| Demo — sample data, nothing is saved | 7 | Pass |
+| Reset demo | 2 | Pass |
+| Download the extension ZIP | 4 | Pass |
+| Sample cooking lesson · 12 seconds | 6 | Pass |
+| Control a sample tab | 4 | Pass |
+| This sample has quiet instruction and two sudden peaks. | 9 | Pass |
+| Set a limit, then listen. | 5 | Pass |
+| Play sample | 2 | Pass |
+| Ready. | 1 | Pass |
+| The sample is ready. | 4 | Pass |
+| Play it to see the peak. | 6 | Pass |
+| Tip: try a −12 dB peak limit, then replay the sample. | 11 | Pass |
+| What is in the sample | 6 | Pass |
+| Quiet lesson bed | 3 | Pass |
+| First volume jump | 3 | Pass |
+| Second volume jump | 3 | Pass |
+
+## README
+
+Every heading, prose sentence, list item, and artifact label was checked. The
+longest prose sentence is 17 words. The earlier flagged terms were replaced:
+
+| Earlier wording | Current wording | Result |
+| --- | --- | --- |
+| Try the sandbox | Try the demo | Pass |
+| One sentence combining limiting, metering, and mute | Three short sentences, one action each | Pass |
+| MV3 | Manifest V3 | Pass |
+| image provenance | image source and generation notes | Pass |
+| SPA fallback | known routes go to the single-page app | Pass |
+| third-party runtime assets | Removed; the surrounding privacy facts remain concrete | Pass |
+
+The published installation flow is also listed as five separate steps. It
+starts with downloading and extracting the ZIP before opening Chrome settings.
 
 ## Terminology
 
 | Concept | One term used |
 | --- | --- |
-| Protected browser page | protected media |
 | Per-tab safety control | guard |
 | Maximum allowed peak | peak limit |
 | Gain before limiting | level trim |
@@ -69,6 +111,7 @@ step without relying on the illustration.
 | Visual level display | meter |
 | Isolated try-out | demo |
 | Captured browser page | tab |
+| Downloaded package | ZIP |
 
 Catalog description: “Keep each browser tab at a predictable listening
 level.” It is 56 characters, starts with a verb, and contains no banned word.

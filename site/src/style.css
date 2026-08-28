@@ -425,14 +425,40 @@ h3 {
   margin-top: 16px;
 }
 .install {
-  text-align: center;
   max-width: 800px;
   margin: auto;
   padding: 112px 32px;
 }
-.install p:not(.kicker) {
+.install h2,
+.install .kicker,
+.install > .button {
+  margin-left: 44px;
+}
+.install-steps {
+  margin: 32px 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: install-step;
+}
+.install-steps li {
+  position: relative;
+  min-height: 44px;
+  padding: 8px 0 8px 52px;
   color: var(--muted);
   font-size: 18px;
+}
+.install-steps li::before {
+  counter-increment: install-step;
+  content: counter(install-step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 4px;
+  color: var(--ochre);
+  font: italic 24px Georgia, serif;
+}
+.install code {
+  overflow-wrap: anywhere;
+  word-break: break-all;
 }
 .install .button {
   margin-top: 16px;
@@ -557,6 +583,15 @@ footer nav a,
   min-height: 44px;
   min-width: 44px;
 }
+.prose a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.external-label {
+  margin-left: 4px;
+  font-size: 0.82em;
+}
 .build {
   grid-column: 1/-1;
   font-size: 16px;
@@ -583,12 +618,20 @@ h1:focus-visible {
   }
   .site-header {
     padding: 12px 18px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .site-header nav {
-    gap: 10px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
   .site-header nav a {
-    display: none;
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+    text-align: center;
   }
   .site-header nav .download-small {
     display: flex;
@@ -626,6 +669,11 @@ h1:focus-visible {
   .prose {
     padding-left: 20px;
     padding-right: 20px;
+  }
+  .install h2,
+  .install .kicker,
+  .install > .button {
+    margin-left: 0;
   }
   .how li {
     grid-template-columns: 56px 1fr;
