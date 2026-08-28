@@ -1,73 +1,78 @@
-# Loudness Lens v1 handoff
+# Independent verification handoff — FAIL
 
-## What shipped
+## Result
 
-- A WXT/TypeScript Chrome MV3 extension with explicit per-tab consent.
-- A 10 ms look-ahead limiter, −18 to −1 dB peak limit, −12 to +6 dB
-  level trim, live peak/reduction feedback, and immediate mute.
-- Per-tab lifecycle handling for start, stop, reload, closed tabs, unsupported
-  pages, and extension service-worker restarts.
-- A responsive botanical field-guide site with `/`, `/demo`, `/privacy`,
-  `/terms`, and a designed 404 state.
-- A one-click sandbox with a shipped 12-second audio sample, isolated
-  `demo:loudness-lens:v1` storage, reset, and discard-on-exit behavior.
-- A packaged extension at
-  `dist/site/downloads/loudness-lens-chrome.zip` after building.
-- Original generated botanical art, responsive WebP exports, product icons,
-  a 1200 × 630 social image, and documented provenance.
+**FAIL — do not release candidate
+`2498293ac6af324b244842013128267a5195eac9`.**
 
-## How to run and verify
+Verified on 28 August 2026 against
+`https://loudness-lens.sociobot.in`. The live site and every file inside its
+downloadable extension match the fresh candidate build.
+
+The core job works: the one-click demo plays and limits its shipped sample,
+and a real Chrome toolbar invocation enabled capture on the live demo tab,
+showed a live meter and 4.2 dB of limiter reduction, accepted limit/trim/mute
+changes, and stopped capture on tab reload. All 11 declared claim commands,
+11 unit tests, 26 Playwright tests,
+typecheck, and the exact production build pass.
+
+## Release blockers and defects
+
+1. **High:** browser Back leaves `demo:loudness-lens:v1` behind. Returning to
+   `/demo` restores the changed value, contrary to the discard-on-exit demo
+   contract.
+2. **High:** demo storage/reset/discard promises and the 12-second/two-jump
+   sample claims are not listed in `.factory/claims.json`. The claims contract
+   makes unlisted claims release-blocking.
+3. **Medium:** mobile targets below 44 px include Reset demo (32 px), Start for
+   real (21.7 px), the 36 px wordmark, footer links (24.8 px), and the 21 px
+   privacy email. Both extension range controls are 28 px high.
+4. **Medium:** all deployed assets, including fingerprinted JS/CSS, use only
+   `max-age=30`; the performance contract requires long-lived immutable asset
+   caching.
+5. **Medium:** `npm audit` reports 14 build/test dependency findings (5
+   critical, 6 high, 3 moderate). `npm audit --omit=dev` reports zero shipped
+   runtime findings.
+6. **Low:** unknown routes render the designed page but return HTTP 200 and a
+   self-canonical URL instead of a real 404 response.
+
+Full evidence and exact reproduction details are in
+`.factory/verification.md`.
+
+## Passed evidence
+
+- Cold first screen plainly states the job, audience, and **Try it with sample
+  data** action at desktop and 390 px mobile.
+- `npm ci`, `npm test`, `npm run typecheck`, and `npm run build` exit 0.
+- Factory URL verifier exits 0; no console or page errors were observed.
+- Axe reports zero violations on all routes at desktop/mobile and in dark,
+  reduced-motion mode. Keyboard controls and visible focus work.
+- Lighthouse 13 mobile: 100 performance, 100 accessibility, 100 best
+  practices, 100 SEO; LCP 1.37 s, TBT 57 ms, CLS 0.
+- Initial transfer is 96.3 KB; site JS is 5.07 KB gzip and CSS is 3.08 KB
+  gzip.
+- CSP, HSTS, nosniff, referrer, and permissions policies are present.
+- Runtime traffic is same-origin; there is no backend, sign-in, analytics,
+  product unlock, or server API. Rate-limit and Entra checks are not
+  applicable.
+
+## How to reproduce
 
 ```sh
-npm install
+npm ci
 npm test
+npm run typecheck
 npm run build
-npm run dev:site
 ```
 
-`npm test` completed on 28 August 2026 with 11 unit tests and 26 Playwright
-checks passing. The browser checks cover desktop Chromium, a 390 px mobile
-viewport, all routes, dark mode, keyboard focus, Axe, console errors, demo
-storage, local-only requests, the downloadable package, and observed limiter
-gain reduction. TypeScript also passes with no errors.
-
-The production extension was loaded as an unpacked MV3 extension in Chromium.
-Its service worker and popup started with no console or page errors. The popup
-reported `Guard off` for an uncaptured tab.
-
-The factory URL verifier reported HTTP 200, one h1, one main landmark, English
-language metadata, complete image alt text, labeled buttons, and no console
-errors at desktop and mobile sizes.
-
-Lighthouse mobile results from the production build:
-
-| Category or metric | Result |
-| --- | ---: |
-| Performance | 100 |
-| Accessibility | 100 |
-| Best practices | 100 |
-| SEO | 100 |
-| Largest Contentful Paint | 1.66 s |
-| Total Blocking Time | 5 ms |
-| Cumulative Layout Shift | 0 |
-
-Budget results: site JavaScript is 5.07 KB gzip, CSS is 3.08 KB gzip, the
-mobile hero is 21.3 KB, the unpacked production extension is 69.3 KB, and the
-extension zip is 53.1 KB.
-
-## Known limits
-
-- Chrome blocks tab capture on internal pages and some protected media. The
-  popup explains this and leaves the guard off.
-- This build is an unsigned zip for unpacked installation. Store signing and
-  publication remain factory deployment tasks.
-- Listening safety still depends on system volume, headphones, and hardware.
-  The terms page states that the extension is not a medical safety guarantee.
+For the main blocker: open `/`, enter the demo, change Level trim, use browser
+Back, then browser Forward. The changed trim remains. For touch sizing, inspect
+interactive element rectangles at a 390 × 844 CSS viewport and the built
+extension popup.
 
 ## Next steps
 
-- Run the planned 30-person, two-week beta and measure prevented volume-jump
-  incidents against the 70% success target.
-- Use beta reports to tune the default −6 dB ceiling and limiter release.
-- Publish the exact built package through the Chrome Web Store when the factory
-  is ready; no infrastructure or billing work is needed.
+Fix the two high-severity contract failures and the touch-target baseline,
+then rerun every claim command and independent verification. Also correct
+asset caching, update the vulnerable toolchain, and configure true 404
+responses before release.
