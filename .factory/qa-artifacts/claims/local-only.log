@@ -1,0 +1,100 @@
+
+> loudness-lens@1.0.0 test:e2e
+> npm run build && playwright test --grep @claim:local-only
+
+
+> loudness-lens@1.0.0 build
+> npm run build:site
+
+
+> loudness-lens@1.0.0 build:site
+> npm run build:extension && vite build --config site/vite.config.ts && node scripts/package.mjs
+
+
+> loudness-lens@1.0.0 build:extension
+> wxt build && wxt zip
+
+
+WXT 0.21.4
+ℹ Building chrome-mv3 for production with Vite 6.4.3
+[?25l⠋ Preparing...[K⠋ [1/2] background[K⠙ [1/2] background[K⠹ [1/2] background[K⠹ [2/2] offscreen, popup[K⠸ [2/2] offscreen, popup[K⠼ [2/2] offscreen, popup[K[K[?25h[K[?25h✔ Built extension in 609 ms
+  ├─ dist/extension/chrome-mv3/manifest.json                 484 B   
+  ├─ dist/extension/chrome-mv3/offscreen.html                295 B   
+  ├─ dist/extension/chrome-mv3/popup.html                    2.40 kB 
+  ├─ dist/extension/chrome-mv3/background.js                 3.51 kB 
+  ├─ dist/extension/chrome-mv3/chunks/audio-ClmpGlDn.js      1.06 kB 
+  ├─ dist/extension/chrome-mv3/chunks/offscreen-DesKD8t3.js  1.83 kB 
+  ├─ dist/extension/chrome-mv3/chunks/popup-P9FxGQnq.js      2.41 kB 
+  ├─ dist/extension/chrome-mv3/limiter-worklet.js            2.02 kB 
+  ├─ dist/extension/chrome-mv3/assets/popup-BbJHb-Z2.css     4.82 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-128.png            32.50 kB
+  ├─ dist/extension/chrome-mv3/icons/icon-16.png             1.04 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-32.png             2.28 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-48.png             4.68 kB 
+  └─ dist/extension/chrome-mv3/icons/mark.svg                418 B   
+Σ Total size: 59.75 kB                                     
+✔ Finished in 863 ms
+
+WXT 0.21.4
+ℹ Building chrome-mv3 for production with Vite 6.4.3
+[?25l⠋ Preparing...[K⠋ [1/2] background[K⠙ [1/2] background[K⠹ [1/2] background[K⠹ [2/2] offscreen, popup[K⠸ [2/2] offscreen, popup[K⠼ [2/2] offscreen, popup[K[K[?25h[K[?25h✔ Built extension in 614 ms
+  ├─ dist/extension/chrome-mv3/manifest.json                 484 B   
+  ├─ dist/extension/chrome-mv3/offscreen.html                295 B   
+  ├─ dist/extension/chrome-mv3/popup.html                    2.40 kB 
+  ├─ dist/extension/chrome-mv3/background.js                 3.51 kB 
+  ├─ dist/extension/chrome-mv3/chunks/audio-ClmpGlDn.js      1.06 kB 
+  ├─ dist/extension/chrome-mv3/chunks/offscreen-DesKD8t3.js  1.83 kB 
+  ├─ dist/extension/chrome-mv3/chunks/popup-P9FxGQnq.js      2.41 kB 
+  ├─ dist/extension/chrome-mv3/limiter-worklet.js            2.02 kB 
+  ├─ dist/extension/chrome-mv3/assets/popup-BbJHb-Z2.css     4.82 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-128.png            32.50 kB
+  ├─ dist/extension/chrome-mv3/icons/icon-16.png             1.04 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-32.png             2.28 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-48.png             4.68 kB 
+  └─ dist/extension/chrome-mv3/icons/mark.svg                418 B   
+Σ Total size: 59.75 kB                                     
+ℹ Zipping extension...
+✔ Zipped extension in 20 ms
+  └─ dist/extension/loudness-lens-1.0.0-chrome.zip  50.20 kB
+Σ Total size: 50.20 kB                            
+✔ Finished in 887 ms
+vite v6.4.3 building for production...
+transforming...
+✓ 6 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/404.html                      0.94 kB │ gzip: 0.48 kB
+../dist/site/index.html                    1.78 kB │ gzip: 0.62 kB
+../dist/site/assets/style-Ct85knlc.css    10.23 kB │ gzip: 3.10 kB
+../dist/site/assets/style-DwY07lEd.js      0.71 kB │ gzip: 0.40 kB
+../dist/site/assets/notFound-COZ_Pp2F.js   1.24 kB │ gzip: 0.70 kB
+../dist/site/assets/main-DvQ1JRIX.js      12.71 kB │ gzip: 4.82 kB
+✓ built in 169ms
+[1A[2K[2m[WebServer] [22m(node:10696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:10709) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:10727) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:10728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:10727) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:10728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [chromium] › tests/e2e/site.spec.ts:4:1 › @claim:local-only keeps the complete demo flow on the same origin
+[1A[2K[2/2] [mobile] › tests/e2e/site.spec.ts:4:1 › @claim:local-only keeps the complete demo flow on the same origin
+[1A[2K  2 passed (6.8s)
