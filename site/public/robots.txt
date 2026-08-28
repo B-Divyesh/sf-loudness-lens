@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://loudness-lens.sociobot.in/sitemap.xml

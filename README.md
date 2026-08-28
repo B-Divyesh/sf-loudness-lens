@@ -1,14 +1,69 @@
 # Loudness Lens
 
-Live: https://loudness-lens.sociobot.in — built by the Param Factory (`browser-extension`).
+Keep each browser tab at a predictable listening level.
 
-See `.factory/brief.json` for the researched problem this solves and `.factory/design.md` for the visual system.
+Loudness Lens is a free Chrome extension for mixed videos, lessons, and music.
+It captures only the tab you enable. A 10 ms look-ahead limiter reduces peaks,
+the live meter shows the result, and **Mute now** cuts the captured output.
+Audio is processed inside Chrome and is never recorded or uploaded.
+
+## Try the sandbox
+
+Open `/demo` on the site, or run the site and visit
+`http://localhost:5173/demo`. The shipped 12-second lesson sample contains two
+volume jumps. Demo settings use the separate `demo:loudness-lens:v1` storage
+key. **Reset demo** clears it.
+
+## Requirements
+
+- Node.js 20 or newer
+- npm 10 or newer
+- Chrome 116 or newer
 
 ## Develop
 
-```
+```sh
 npm install
-npm run dev
-npm test
-npm run build   # -> dist/
+npm run dev          # WXT extension development
+npm run dev:site     # site at http://localhost:5173
 ```
+
+Open `chrome://extensions`, turn on Developer mode, choose **Load unpacked**,
+and select `dist/extension/chrome-mv3` during development.
+
+## Test and build
+
+```sh
+npm test
+npm run build
+```
+
+The exact production build command is `npm run build`. It creates:
+
+- `dist/extension/chrome-mv3/` — unpacked MV3 extension
+- `dist/extension/loudness-lens-1.0.0-chrome.zip` — package archive
+- `dist/site/index.html` — static site root
+- `dist/site/downloads/loudness-lens-chrome.zip` — public download
+
+`npm run build:site` performs the same deploy build and also packages the
+extension download into `dist/site/`.
+
+Claim tests are listed in `.factory/claims.json`. Design and image provenance
+are in `.factory/design.md`.
+
+## Browser limits and privacy
+
+Chrome can block capture on protected pages and internal browser pages. The
+extension reports that error and leaves the guard off. Closing or reloading a
+tab ends its capture. Loudness Lens has no backend, accounts, analytics, or
+third-party runtime assets. See `/privacy` and `/terms` on the site.
+
+## Deploy
+
+Deploy `dist/site/` as the static root. The included
+`staticwebapp.config.json` supplies SPA fallback and security headers. Factory
+infrastructure handles hosting and DNS.
+
+## License
+
+MIT. See [LICENSE](LICENSE).

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loudness Lens — tab loudness guard</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <div class="mark" aria-hidden="true">⌇</div>
+        <div><p class="eyebrow">Loudness Lens · per-tab control</p><h1>Guard this tab’s volume</h1></div>
+        <span id="status-badge" class="badge">Guard off</span>
+      </header>
+
+      <section class="specimen" aria-labelledby="meter-heading">
+        <div class="meter-head"><h2 id="meter-heading">Live peak</h2><output id="peak-value">−60 dB</output></div>
+        <div class="meter-track">
+          <meter id="peak-meter" class="meter-gauge" aria-label="Current audio peak" min="-60" max="0" value="-60">−60 dB</meter><i id="ceiling-mark" class="limit-6"></i>
+        </div>
+        <p id="meter-detail" class="meter-detail" aria-live="polite">Turn on the guard to see this tab’s sound.</p>
+      </section>
+
+      <div id="error" class="notice" role="alert" hidden></div>
+
+      <section class="controls" aria-label="Loudness controls">
+        <div class="switch-row">
+          <div><h2>Tab guard</h2><p>Only this tab’s sound passes through the limiter.</p></div>
+          <label class="switch"><input id="enabled" type="checkbox"><span></span><b>Guard</b></label>
+        </div>
+        <label for="ceiling">Peak limit <output id="ceiling-value">−6 dB</output></label>
+        <input id="ceiling" type="range" min="-18" max="-1" step="1" value="-6">
+        <div class="range-labels"><span>Quieter</span><span>More range</span></div>
+
+        <label for="gain">Level trim <output id="gain-value">0 dB</output></label>
+        <input id="gain" type="range" min="-12" max="6" step="1" value="0">
+        <div class="range-labels"><span>−12 dB</span><span>+6 dB</span></div>
+
+        <button id="panic" class="panic" type="button"><span aria-hidden="true">×</span> Mute now</button>
+      </section>
+      <p class="privacy">Audio stays in this browser. Closing the tab ends its guard.</p>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

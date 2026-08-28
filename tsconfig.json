@@ -1,0 +1,14 @@
+{
+  "extends": "./.wxt/tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "types": ["chrome", "vitest/globals"],
+    "skipLibCheck": true
+  },
+  "include": [".wxt/**/*.d.ts", "entrypoints", "lib", "site", "tests", "wxt.config.ts"]
+}

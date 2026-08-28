@@ -1,0 +1,9 @@
+{
+  "slug": "loudness-lens",
+  "title": "Loudness Lens",
+  "summary": "Keep each browser tab at a predictable listening level.",
+  "artifact_class": "browser-extension",
+  "monetization": "free",
+  "job": "Give people watching mixed web video, lessons, and music a visible per-tab loudness guard.",
+  "non_goals": ["DRM bypass", "recording", "background audio interception"]
+}

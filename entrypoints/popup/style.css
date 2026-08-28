@@ -1,0 +1,323 @@
+:root {
+  color-scheme: light dark;
+  --paper: #f3eedb;
+  --raised: #fffbea;
+  --ink: #17231a;
+  --muted: #526052;
+  --fern: #245c42;
+  --ochre: #b46a2c;
+  --berry: #a43838;
+  --rule: #8e896e;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 360px;
+  background: linear-gradient(
+      90deg,
+      transparent 31px,
+      rgba(164, 56, 56, 0.18) 32px,
+      transparent 33px
+    ),
+    var(--paper);
+}
+main {
+  padding: 20px 20px 18px 48px;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 14px;
+}
+.mark {
+  font: 32px Georgia;
+  color: var(--fern);
+}
+h1,
+h2,
+p {
+  margin: 0;
+}
+h1 {
+  font:
+    700 24px/1 Georgia,
+    serif;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.badge {
+  border: 1px solid var(--rule);
+  border-radius: 99px;
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.badge[data-on="true"] {
+  background: var(--fern);
+  color: #fff;
+  border-color: var(--fern);
+}
+.specimen {
+  margin: 18px 0;
+  padding: 16px;
+  background: var(--raised);
+  border: 1px solid var(--ink);
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+}
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.meter-head h2,
+.controls h2 {
+  font:
+    700 15px Georgia,
+    serif;
+}
+.meter-head output {
+  font:
+    700 18px ui-monospace,
+    monospace;
+  font-variant-numeric: tabular-nums;
+}
+.meter-track {
+  position: relative;
+  height: 22px;
+  margin: 14px 0 10px;
+  background: repeating-linear-gradient(
+      90deg,
+      #d6d2b9 0,
+      #d6d2b9 1px,
+      transparent 1px,
+      transparent 10%
+    ),
+    #e7e2ca;
+  border: 1px solid var(--rule);
+  overflow: visible;
+}
+.meter-track #meter-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--fern);
+  transition: width 0.18s ease;
+}
+.meter-track i {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  left: 90%;
+  width: 2px;
+  background: var(--berry);
+}
+.meter-detail {
+  font-size: 12px;
+  color: var(--muted);
+  min-height: 18px;
+}
+.notice {
+  padding: 12px;
+  margin-bottom: 14px;
+  background: #f2d8cf;
+  border-left: 4px solid var(--berry);
+  color: #551b1b;
+  font-size: 13px;
+}
+.controls {
+  display: grid;
+  gap: 9px;
+}
+.switch-row {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+.switch-row p {
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 220px;
+  margin-top: 3px;
+}
+.switch {
+  position: relative;
+  display: block;
+  min-width: 56px;
+  height: 44px;
+}
+.switch input {
+  position: absolute;
+  opacity: 0;
+}
+.switch span {
+  position: absolute;
+  inset: 4px 0 4px;
+  background: #cbc7af;
+  border: 1px solid var(--ink);
+  border-radius: 22px;
+}
+.switch span:after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 3px;
+  left: 3px;
+  border-radius: 50%;
+  background: var(--raised);
+  border: 1px solid var(--ink);
+  transition: transform 0.18s;
+}
+.switch input:checked + span {
+  background: var(--fern);
+}
+.switch input:checked + span:after {
+  transform: translateX(19px);
+}
+.switch b {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+label {
+  font:
+    700 13px Georgia,
+    serif;
+  display: flex;
+  justify-content: space-between;
+}
+label output {
+  font-family: ui-monospace, monospace;
+}
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--fern);
+  height: 28px;
+  margin: 0;
+}
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: -8px;
+}
+.panic {
+  min-height: 48px;
+  margin-top: 8px;
+  background: transparent;
+  color: var(--berry);
+  border: 2px solid var(--berry);
+  border-radius: 50% 50% 8px 8px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+}
+.panic.active {
+  background: var(--berry);
+  color: #fff;
+}
+.panic span {
+  font-size: 20px;
+  margin-right: 6px;
+}
+.privacy {
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+button:focus-visible,
+input:focus-visible,
+.switch input:focus-visible + span {
+  outline: 3px solid var(--ochre);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    transition: none !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #172019;
+    --raised: #202c23;
+    --ink: #f4eedb;
+    --muted: #b9c2b5;
+    --fern: #7fc99b;
+    --ochre: #e3a567;
+    --berry: #f28b82;
+    --rule: #707d71;
+  }
+  .meter-track {
+    background: #303c32;
+  }
+  .notice {
+    background: #4a2725;
+    color: #ffd8d2;
+  }
+  .badge[data-on="true"] {
+    color: #102418;
+  }
+  .panic.active {
+    color: #241413;
+  }
+}
+.meter-gauge {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+}
+.meter-gauge::-webkit-meter-bar {
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background: repeating-linear-gradient(90deg, #d6d2b9 0, #d6d2b9 1px, transparent 1px, transparent 10%), #e7e2ca;
+}
+.meter-gauge::-webkit-meter-optimum-value {
+  background: var(--fern);
+  border-radius: 0;
+}
+.meter-gauge::-moz-meter-bar {
+  background: var(--fern);
+  border-radius: 0;
+}
+.limit-18 { left: 70%; }
+.limit-17 { left: 71.667%; }
+.limit-16 { left: 73.333%; }
+.limit-15 { left: 75%; }
+.limit-14 { left: 76.667%; }
+.limit-13 { left: 78.333%; }
+.limit-12 { left: 80%; }
+.limit-11 { left: 81.667%; }
+.limit-10 { left: 83.333%; }
+.limit-9 { left: 85%; }
+.limit-8 { left: 86.667%; }
+.limit-7 { left: 88.333%; }
+.limit-6 { left: 90%; }
+.limit-5 { left: 91.667%; }
+.limit-4 { left: 93.333%; }
+.limit-3 { left: 95%; }
+.limit-2 { left: 96.667%; }
+.limit-1 { left: 98.333%; }
