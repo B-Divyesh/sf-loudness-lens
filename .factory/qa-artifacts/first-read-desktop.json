@@ -1,0 +1,140 @@
+{
+  "url": "https://loudness-lens.sociobot.in/",
+  "status": 200,
+  "headers": {
+    "cache-control": "public, must-revalidate, max-age=30",
+    "content-encoding": "br",
+    "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+    "content-type": "text/html",
+    "date": "Fri, 28 Aug 2026 15:01:56 GMT",
+    "etag": "\"09860801\"",
+    "last-modified": "Fri, 28 Aug 2026 14:20:28 GMT",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "strict-transport-security": "max-age=10886400; includeSubDomains; preload",
+    "vary": "Accept-Encoding",
+    "x-content-type-options": "nosniff",
+    "x-dns-prefetch-control": "off",
+    "x-xss-protection": "1; mode=block"
+  },
+  "title": "Loudness Lens — keep browser volume steady",
+  "h1": [
+    "Keep every tab at a steady volume"
+  ],
+  "viewportText": [
+    {
+      "tag": "span",
+      "text": "Loudness Lens",
+      "top": 29
+    },
+    {
+      "tag": "a",
+      "text": "Demo",
+      "top": 18
+    },
+    {
+      "tag": "a",
+      "text": "How it works",
+      "top": 18
+    },
+    {
+      "tag": "a",
+      "text": "Privacy",
+      "top": 18
+    },
+    {
+      "tag": "a",
+      "text": "Download",
+      "top": 18
+    },
+    {
+      "tag": "p",
+      "text": "A field control for browser sound",
+      "top": 188
+    },
+    {
+      "tag": "h1",
+      "text": "Keep every tab at a steady volume",
+      "top": 220
+    },
+    {
+      "tag": "p",
+      "text": "For people switching between videos, lessons, and music who want fewer sudden volume jumps.",
+      "top": 404
+    },
+    {
+      "tag": "a",
+      "text": "Try it with sample data",
+      "top": 496
+    },
+    {
+      "tag": "span",
+      "text": "Hear a local sample pass through the limiter.",
+      "top": 501
+    },
+    {
+      "tag": "li",
+      "text": "Audio never leaves your browser.",
+      "top": 575
+    },
+    {
+      "tag": "li",
+      "text": "No account or setup server.",
+      "top": 575
+    },
+    {
+      "tag": "li",
+      "text": "Free to use.",
+      "top": 620
+    },
+    {
+      "tag": "figcaption",
+      "text": "Plate I · peaks kept below the bell",
+      "top": 564
+    },
+    {
+      "tag": "span",
+      "text": "SPECIMEN 01 · ACTIVE TAB",
+      "top": 883
+    },
+    {
+      "tag": "output",
+      "text": "−18 dB",
+      "top": 898
+    }
+  ],
+  "actions": [
+    {
+      "tag": "a",
+      "text": "Loudness Lens",
+      "href": "https://loudness-lens.sociobot.in/"
+    },
+    {
+      "tag": "a",
+      "text": "Demo",
+      "href": "https://loudness-lens.sociobot.in/demo"
+    },
+    {
+      "tag": "a",
+      "text": "How it works",
+      "href": "https://loudness-lens.sociobot.in/#how"
+    },
+    {
+      "tag": "a",
+      "text": "Privacy",
+      "href": "https://loudness-lens.sociobot.in/privacy"
+    },
+    {
+      "tag": "a",
+      "text": "Download",
+      "href": "https://loudness-lens.sociobot.in/downloads/loudness-lens-chrome.zip"
+    },
+    {
+      "tag": "a",
+      "text": "Try it with sample data",
+      "href": "https://loudness-lens.sociobot.in/demo"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": []
+}

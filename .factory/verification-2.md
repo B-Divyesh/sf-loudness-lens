@@ -16,6 +16,33 @@ of observable outcomes, and the deployed robots and sitemap resources return
 HTTP 404. Stable, non-versioned assets are also cached as immutable for one
 year.
 
+## Fresh continuation check after the interrupted attempt
+
+The repository already contained the completed independent report at commit
+`d82ce9d`. Following the work-order instruction not to repeat finished work, I
+preserved its full toolbar, Lighthouse, keyboard, and policy evidence and
+rechecked the release gates most likely to change. Between 15:01 and 15:05 UTC
+on 28 August 2026:
+
+- all 15 exact commands in `.factory/claims.json` passed again; individual
+  output is under `.factory/qa-artifacts/claims/`;
+- a cold live load passed the mandatory first-read gate with no console or page
+  errors (`first-read-desktop.json` and the desktop/mobile screenshots);
+- `npm ci`, `npm test`, a separate `npm run build`, and `npm audit` passed again
+  (`npm-*.log`); the suite passed 13 Vitest and 34 Playwright tests;
+- fresh desktop and 390 px live smoke tests found no serious/critical Axe
+  findings, cross-origin traffic, reduced-motion transitions, or horizontal
+  overflow (`live-smoke.json`);
+- `/robots.txt` and `/sitemap.xml` still returned 404, and the stable extension
+  ZIP, SVG, and WAV still returned one-year immutable caching; and
+- fresh SHA-256 comparisons matched the deployed root, JS, CSS, SVG, WAV,
+  robots body, and sitemap body to the production build. All 14 extracted
+  extension files matched (`identity/hashes.txt` and
+  `identity/extension-diff.txt`).
+
+These fresh results confirm the existing **FAIL** verdict; this is not a stale
+deployment-only failure.
+
 ## Release-blocking findings
 
 ### High — the claims contract is incomplete

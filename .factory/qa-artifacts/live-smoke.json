@@ -1,0 +1,180 @@
+[
+  {
+    "profile": "desktop",
+    "route": "/",
+    "status": 200,
+    "seriousCritical": [],
+    "structure": {
+      "title": "Loudness Lens — keep browser volume steady",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "overflow": false,
+      "maxTransitionMs": 0
+    }
+  },
+  {
+    "profile": "desktop",
+    "route": "/demo",
+    "status": 200,
+    "seriousCritical": [],
+    "structure": {
+      "title": "Demo — Loudness Lens",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "overflow": false,
+      "maxTransitionMs": 0
+    }
+  },
+  {
+    "profile": "desktop",
+    "route": "/privacy",
+    "status": 200,
+    "seriousCritical": [],
+    "structure": {
+      "title": "Privacy — Loudness Lens",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "overflow": false,
+      "maxTransitionMs": 0
+    }
+  },
+  {
+    "profile": "desktop",
+    "route": "/terms",
+    "status": 200,
+    "seriousCritical": [],
+    "structure": {
+      "title": "Terms — Loudness Lens",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "overflow": false,
+      "maxTransitionMs": 0
+    }
+  },
+  {
+    "profile": "desktop",
+    "route": "/definitely-missing-verification",
+    "status": 404,
+    "h1": "This specimen is not in the guide"
+  },
+  {
+    "profile": "desktop",
+    "demo": {
+      "banner": "Demo — sample data, nothing is saved\nReset demo\nStart for real",
+      "playStatus": "Playing through the local limiter.",
+      "currentTime": 0.946213,
+      "boundaries": {
+        "trim": "6",
+        "ceiling": "-18",
+        "muted": "{\"ceiling\":-18,\"trim\":6,\"muted\":true}"
+      },
+      "reset": {
+        "trim": "0",
+        "ceiling": "-6",
+        "button": "× Mute now"
+      },
+      "malformedRecovery": {
+        "trim": "0",
+        "ceiling": "-6",
+        "button": "× Mute now"
+      }
+    },
+    "errors": [
+      "Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "outbound": []
+  },
+  {
+    "profile": "mobile",
+    "route": "/",
+    "status": 200,
+    "seriousCritical": [],
+    "structure": {
+      "title": "Loudness Lens — keep browser volume steady",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "overflow": false,
+      "maxTransitionMs": 0
+    }
+  },
+  {
+    "profile": "mobile",
+    "route": "/demo",
+    "status": 200,
+    "seriousCritical": [],
+    "structure": {
+      "title": "Demo — Loudness Lens",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "overflow": false,
+      "maxTransitionMs": 0
+    }
+  },
+  {
+    "profile": "mobile",
+    "route": "/privacy",
+    "status": 200,
+    "seriousCritical": [],
+    "structure": {
+      "title": "Privacy — Loudness Lens",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "overflow": false,
+      "maxTransitionMs": 0
+    }
+  },
+  {
+    "profile": "mobile",
+    "route": "/terms",
+    "status": 200,
+    "seriousCritical": [],
+    "structure": {
+      "title": "Terms — Loudness Lens",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "overflow": false,
+      "maxTransitionMs": 0
+    }
+  },
+  {
+    "profile": "mobile",
+    "route": "/definitely-missing-verification",
+    "status": 404,
+    "h1": "This specimen is not in the guide"
+  },
+  {
+    "profile": "mobile",
+    "demo": {
+      "banner": "Demo — sample data, nothing is saved\nReset demo\nStart for real",
+      "playStatus": "Playing through the local limiter.",
+      "currentTime": 0.952438,
+      "boundaries": {
+        "trim": "6",
+        "ceiling": "-18",
+        "muted": "{\"ceiling\":-18,\"trim\":6,\"muted\":true}"
+      },
+      "reset": {
+        "trim": "0",
+        "ceiling": "-6",
+        "button": "× Mute now"
+      },
+      "malformedRecovery": {
+        "trim": "0",
+        "ceiling": "-6",
+        "button": "× Mute now"
+      }
+    },
+    "errors": [
+      "Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "outbound": []
+  }
+]

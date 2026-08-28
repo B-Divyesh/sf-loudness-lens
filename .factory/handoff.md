@@ -11,6 +11,13 @@ longer present: the live output and extension package match the candidate, and
 the real toolbar-driven extension works end to end. The candidate fails the
 mandatory claims and site-structure contracts.
 
+After the interrupted attempt, the release gates were checked again at
+15:01–15:05 UTC. All declared claim commands, the clean install, full suite,
+separate build, audit, first-read test, live desktop/mobile smoke checks, Axe,
+and deployment hashes were refreshed. The same blockers remain, so the result
+is still **FAIL**. Fresh command output and screenshots are in
+`.factory/qa-artifacts/`.
+
 Full evidence is in `.factory/verification-2.md`.
 
 ## Blocking defects
