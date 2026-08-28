@@ -180,8 +180,7 @@ test('readability baseline keeps site instructions at 16 px and reflows at 200% 
 
 test('readability baseline keeps popup guidance at 16 px and reflows at 200% mobile zoom', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  const popupUrl = new URL('../../dist/extension/chrome-mv3/popup.html', import.meta.url).href;
-  await page.goto(popupUrl);
+  await page.goto('http://127.0.0.1:4174/popup.html');
   await expectFontSizeAtLeast(page, ['.meter-detail', '.notice', '.switch-row p', '.badge', '.controls > label', '.range-labels', '.privacy']);
   const results = await new AxeBuilder({ page: page as never }).analyze();
   expect(results.violations.filter((item) => ['serious', 'critical'].includes(item.impact ?? ''))).toEqual([]);
