@@ -1,6 +1,15 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+async function expectFontSizeAtLeast(page: import('@playwright/test').Page, selectors: string[]) {
+  const sizes = await page.locator(selectors.join(', ')).evaluateAll((nodes) => nodes.map((node) => ({
+    selector: node.className || node.tagName,
+    size: Number.parseFloat(getComputedStyle(node).fontSize),
+  })));
+  expect(sizes).not.toEqual([]);
+  expect(sizes.every((item) => item.size >= 16), JSON.stringify(sizes)).toBeTruthy();
+}
+
 test('@claim:local-only keeps the complete demo flow on the same origin', async ({ page }) => {
   const foreign: string[] = [];
   page.on('request', (request) => { if (new URL(request.url()).origin !== 'http://127.0.0.1:4173') foreign.push(request.url()); });
@@ -151,4 +160,35 @@ test('dark theme keeps serious accessibility findings at zero', async ({ page })
   await page.goto('/');
   const results = await new AxeBuilder({ page: page as never }).analyze();
   expect(results.violations.filter((item) => ['serious', 'critical'].includes(item.impact ?? ''))).toEqual([]);
+});
+
+test('readability baseline keeps site instructions at 16 px and reflows at 200% mobile zoom', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expectFontSizeAtLeast(page, ['.hero-actions span', '.plain-facts li', '.meter-note']);
+  await page.goto('/demo');
+  await expectFontSizeAtLeast(page, ['.demo-banner', '#sample-status', '.demo-help', '.meter-note']);
+
+  // A 195 CSS-pixel viewport is the layout viewport Chrome exposes at 200%
+  // browser zoom on the required 390 px mobile check.
+  await page.setViewportSize({ width: 195, height: 844 });
+  await page.reload();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+  await expect(page.getByRole('button', { name: 'Play sample' })).toBeVisible();
+  await expect(page.getByRole('slider', { name: 'Peak limit' })).toBeVisible();
+});
+
+test('readability baseline keeps popup guidance at 16 px and reflows at 200% mobile zoom', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const popupUrl = new URL('../../dist/extension/chrome-mv3/popup.html', import.meta.url).href;
+  await page.goto(popupUrl);
+  await expectFontSizeAtLeast(page, ['.meter-detail', '.notice', '.switch-row p', '.badge', '.controls > label', '.range-labels', '.privacy']);
+  const results = await new AxeBuilder({ page: page as never }).analyze();
+  expect(results.violations.filter((item) => ['serious', 'critical'].includes(item.impact ?? ''))).toEqual([]);
+
+  await page.setViewportSize({ width: 195, height: 844 });
+  await page.reload();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+  await expect(page.getByRole('checkbox', { name: 'Guard' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Mute now' })).toBeVisible();
 });

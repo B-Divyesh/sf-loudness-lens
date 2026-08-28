@@ -11,13 +11,13 @@
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   background: var(--paper);
   color: var(--ink);
+  font-size: 16px;
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
-  min-width: 360px;
   background: linear-gradient(
       90deg,
       transparent 31px,
@@ -31,7 +31,7 @@ main {
 }
 .masthead {
   display: grid;
-  grid-template-columns: 32px 1fr auto;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
   gap: 10px;
   align-items: center;
   border-bottom: 1px solid var(--rule);
@@ -52,7 +52,7 @@ h1 {
     serif;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 16px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--muted);
@@ -62,7 +62,7 @@ h1 {
   border: 1px solid var(--rule);
   border-radius: 99px;
   padding: 6px 8px;
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
 }
 .badge[data-on="true"] {
@@ -85,7 +85,7 @@ h1 {
 .meter-head h2,
 .controls h2 {
   font:
-    700 15px Georgia,
+    700 16px Georgia,
     serif;
 }
 .meter-head output {
@@ -125,7 +125,7 @@ h1 {
   background: var(--berry);
 }
 .meter-detail {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--muted);
   min-height: 18px;
 }
@@ -135,7 +135,7 @@ h1 {
   background: #f2d8cf;
   border-left: 4px solid var(--berry);
   color: #551b1b;
-  font-size: 13px;
+  font-size: 16px;
 }
 .controls {
   display: grid;
@@ -149,7 +149,7 @@ h1 {
   margin-bottom: 7px;
 }
 .switch-row p {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--muted);
   max-width: 220px;
   margin-top: 3px;
@@ -195,7 +195,7 @@ h1 {
 }
 label {
   font:
-    700 13px Georgia,
+    700 16px Georgia,
     serif;
   display: flex;
   justify-content: space-between;
@@ -212,7 +212,7 @@ input[type="range"] {
 .range-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 16px;
   color: var(--muted);
   margin-top: -8px;
 }
@@ -224,7 +224,7 @@ input[type="range"] {
   border: 2px solid var(--berry);
   border-radius: 50% 50% 8px 8px;
   font-weight: 800;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 .panic.active {
@@ -237,7 +237,7 @@ input[type="range"] {
 }
 .privacy {
   margin-top: 14px;
-  font-size: 11px;
+  font-size: 16px;
   color: var(--muted);
   text-align: center;
 }
@@ -252,6 +252,24 @@ input:focus-visible,
   *:before,
   *:after {
     transition: none !important;
+  }
+}
+@media (max-width: 280px) {
+  main {
+    padding: 16px;
+  }
+  .masthead {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .mark {
+    display: none;
+  }
+  .switch-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .switch {
+    align-self: flex-end;
   }
 }
 @media (prefers-color-scheme: dark) {

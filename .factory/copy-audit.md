@@ -40,10 +40,10 @@ are included. No line exceeds 22 words. No line uses a banned word.
 | Use Mute now if sound feels unsafe. | 7 | — |
 | Clear boundaries | 2 | — |
 | What the guard does not do | 6 | — |
-| It does not record sound. | 5 | — |
+| It starts only when you turn it on for a tab. | 11 | — |
 | It does not capture background tabs by itself. | 8 | — |
-| It cannot process protected media that Chrome blocks. | 8 | — |
-| It does not change your system volume. | 7 | — |
+| Some tabs cannot provide audio to Chrome extensions. | 8 | — |
+| It cannot guarantee a safe listening level. | 7 | — |
 | Chrome extension · v1 | 3 | — |
 | Put the guard beside your address bar | 7 | — |
 | Download the package, open Chrome extensions, and load the unpacked folder. | 11 | — |
