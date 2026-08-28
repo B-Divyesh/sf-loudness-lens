@@ -1,0 +1,265 @@
+{
+  "checkedAt": "2026-08-28T19:12:25.558Z",
+  "routes": {
+    "/": {
+      "195": {
+        "status": 200,
+        "title": "Loudness Lens — keep browser volume steady",
+        "description": "Keep one browser tab at a steady level with a visible peak limit and a quick mute control.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 195,
+        "innerWidth": 195,
+        "wordmark": "Loudness Lens home",
+        "canonical": "https://loudness-lens.sociobot.in/",
+        "robots": null,
+        "serious": [],
+        "errors": [],
+        "pass": true
+      },
+      "390": {
+        "status": 200,
+        "title": "Loudness Lens — keep browser volume steady",
+        "description": "Keep one browser tab at a steady level with a visible peak limit and a quick mute control.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "wordmark": "Loudness Lens home",
+        "canonical": "https://loudness-lens.sociobot.in/",
+        "robots": null,
+        "serious": [],
+        "errors": [],
+        "pass": true
+      }
+    },
+    "/demo": {
+      "195": {
+        "status": 200,
+        "title": "Demo — Loudness Lens",
+        "description": "Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 195,
+        "innerWidth": 195,
+        "wordmark": "Loudness Lens home",
+        "canonical": "https://loudness-lens.sociobot.in/demo",
+        "robots": null,
+        "serious": [],
+        "errors": [],
+        "pass": true
+      },
+      "390": {
+        "status": 200,
+        "title": "Demo — Loudness Lens",
+        "description": "Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "wordmark": "Loudness Lens home",
+        "canonical": "https://loudness-lens.sociobot.in/demo",
+        "robots": null,
+        "serious": [],
+        "errors": [],
+        "pass": true
+      }
+    },
+    "/privacy": {
+      "195": {
+        "status": 200,
+        "title": "Privacy — Loudness Lens",
+        "description": "Read what Loudness Lens stores, how tab audio stays on your device, and how demo data is separated and discarded.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 195,
+        "innerWidth": 195,
+        "wordmark": "Loudness Lens home",
+        "canonical": "https://loudness-lens.sociobot.in/privacy",
+        "robots": null,
+        "serious": [],
+        "errors": [],
+        "pass": true
+      },
+      "390": {
+        "status": 200,
+        "title": "Privacy — Loudness Lens",
+        "description": "Read what Loudness Lens stores, how tab audio stays on your device, and how demo data is separated and discarded.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "wordmark": "Loudness Lens home",
+        "canonical": "https://loudness-lens.sociobot.in/privacy",
+        "robots": null,
+        "serious": [],
+        "errors": [],
+        "pass": true
+      }
+    },
+    "/terms": {
+      "195": {
+        "status": 200,
+        "title": "Terms — Loudness Lens",
+        "description": "Read the terms, browser limits, and listening-safety boundaries for the free Loudness Lens Chrome extension.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 195,
+        "innerWidth": 195,
+        "wordmark": "Loudness Lens home",
+        "canonical": "https://loudness-lens.sociobot.in/terms",
+        "robots": null,
+        "serious": [],
+        "errors": [],
+        "pass": true
+      },
+      "390": {
+        "status": 200,
+        "title": "Terms — Loudness Lens",
+        "description": "Read the terms, browser limits, and listening-safety boundaries for the free Loudness Lens Chrome extension.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "wordmark": "Loudness Lens home",
+        "canonical": "https://loudness-lens.sociobot.in/terms",
+        "robots": null,
+        "serious": [],
+        "errors": [],
+        "pass": true
+      }
+    },
+    "/missing": {
+      "195": {
+        "status": 404,
+        "title": "Page not found — Loudness Lens",
+        "description": "The requested Loudness Lens page was not found.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 195,
+        "innerWidth": 195,
+        "wordmark": "Loudness Lens home",
+        "canonical": null,
+        "robots": "noindex",
+        "serious": [],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 ()"
+        ],
+        "pass": true,
+        "expectedDocument404Console": true
+      },
+      "390": {
+        "status": 404,
+        "title": "Page not found — Loudness Lens",
+        "description": "The requested Loudness Lens page was not found.",
+        "lang": "en",
+        "h1": 1,
+        "main": 1,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "wordmark": "Loudness Lens home",
+        "canonical": null,
+        "robots": "noindex",
+        "serious": [],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 ()"
+        ],
+        "pass": true,
+        "expectedDocument404Console": true
+      }
+    }
+  },
+  "demo": {
+    "initial": {
+      "title": "Demo — Loudness Lens",
+      "banner": "Demo — sample data, nothing is saved\nReset demo\nDownload the extension ZIP",
+      "note": "The sample is ready. Play it to see the peak."
+    },
+    "onlyDemoKey": [
+      "demo:loudness-lens:v1",
+      "loudness-lens:real"
+    ],
+    "reset": {
+      "trim": "0",
+      "ceiling": "-6",
+      "real": "keep"
+    },
+    "offlineReadout": "−14 dB",
+    "discarded": null,
+    "foreignRequests": [],
+    "pass": true
+  },
+  "preview": {
+    "marker": "meter-limit limit-12",
+    "readout": "−12 dB",
+    "mute": "true",
+    "install": [
+      "Download the ZIP.",
+      "Extract the ZIP.",
+      "Open chrome://extensions.",
+      "Turn on Developer mode.",
+      "Choose Load unpacked and select the extracted folder."
+    ],
+    "external": true,
+    "pass": true
+  },
+  "routing": {
+    "url": "https://loudness-lens.sociobot.in/#how",
+    "focus": "H1:Keep every tab at a steady volume",
+    "announcement": "Keep every tab at a steady volume",
+    "howTop": 1,
+    "pass": true
+  },
+  "links": {
+    "crawled": [
+      {
+        "href": "https://loudness-lens.sociobot.in/#main",
+        "status": 200
+      },
+      {
+        "href": "https://loudness-lens.sociobot.in/",
+        "status": 200
+      },
+      {
+        "href": "https://loudness-lens.sociobot.in/?demo=1",
+        "status": 200
+      },
+      {
+        "href": "https://loudness-lens.sociobot.in/#how",
+        "status": 200
+      },
+      {
+        "href": "https://loudness-lens.sociobot.in/privacy",
+        "status": 200
+      },
+      {
+        "href": "https://loudness-lens.sociobot.in/downloads/loudness-lens-chrome-1.0.0.zip",
+        "status": 200
+      },
+      {
+        "href": "https://loudness-lens.sociobot.in/terms",
+        "status": 200
+      },
+      {
+        "href": "https://sociobot.in/",
+        "status": 200
+      }
+    ],
+    "zip": {
+      "status": 200,
+      "bytes": 50455
+    },
+    "missing": 404,
+    "pass": true
+  },
+  "pass": true
+}
