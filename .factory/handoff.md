@@ -1,11 +1,12 @@
-# Loudness Lens polish round 2 handoff
+# Loudness Lens review 3 handoff
 
 ## Result
 
-PASS. All 17 findings from review 1 and both findings from review 2 are closed.
-The WXT Manifest V3 extension and static site remain the original artifact and
-deployment classes. No known product, test, accessibility, privacy, or
-deployment gap remains.
+**FAIL.** This review changed no product source. It recorded one blocking
+copy/claims issue and one major incomplete-installation issue in
+`.factory/review-3.md`.
+
+The earlier polish-round evidence below is retained as historical context.
 
 ## What changed
 
@@ -75,6 +76,24 @@ npm run build:site
 The static deployment root is `dist/site/`. Load
 `dist/extension/chrome-mv3/` as an unpacked extension for local Chrome testing.
 
+## Review 3 verification
+
+- Fresh live first reads at 390 × 844 and 1440 × 900.
+- Direct live demo: one-click entry, realistic 12-second sample playback,
+  persistent banner, reset, separate demo storage, real-data sentinel,
+  download/exit discard behavior, and same-origin-only requests.
+- Fresh Axe checks on live `/`, `/demo`, `/privacy`, `/terms`, and 404: zero
+  serious/critical findings.
+- Live route/status checks for root, demo, Privacy, Terms, 404, robots,
+  sitemap, navigation links, and the downloadable ZIP. The ZIP passed archive
+  integrity verification.
+- In fresh clone `/tmp/loudness-lens-review-3.E0dekW/repo`: `npm ci`, all 17
+  exact commands from `.factory/claims.json`, and `npm test` passed. The full
+  suite reported 52 passing Playwright tests.
+
 ## Known gaps and next steps
 
-None. Routine dependency and browser-version maintenance only.
+1. Resolve F-3-1: describe and test per-tab peak limiting rather than universal
+   steady-volume normalisation.
+2. Resolve F-3-2: add Chrome’s Extensions-menu pin instruction or change the
+   install heading so it does not promise toolbar placement.
