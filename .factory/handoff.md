@@ -3,7 +3,8 @@
 ## Result
 
 Repaired the release blockers reported for candidate
-`7885872f2569f6dc46510fb13303a12fc3d0e49a`.
+`7885872f2569f6dc46510fb13303a12fc3d0e49a` and deployed the final static
+build from commit `53c7e75` on 28 August 2026.
 
 ## What changed
 
@@ -53,6 +54,11 @@ Additional checks passed:
 - Local build smoke — `/robots.txt` and `/sitemap.xml` returned 200 with the
   expected MIME types; the deployment-config regression asserts successful
   routes and versioned immutable assets.
+- Live deployment — `/robots.txt` and `/sitemap.xml` each return HTTP 200 with
+  `max-age=300, must-revalidate`; versioned SVG, WAV, and `1.0.0` ZIP URLs each
+  return HTTP 200 with `max-age=31536000, immutable`.
+- Live identity — the landing document contains `mark-v1.svg`; factory URL
+  verification completed in 789 ms with zero console/page errors.
 
 `npx @axe-core/cli` was attempted as an additional check but the CLI's bundled
 ChromeDriver is version 152 while the supplied Playwright Chromium is version
@@ -74,6 +80,4 @@ return HTTP 200 and the versioned public assets have immutable cache headers.
 
 ## Known gaps
 
-None in the repository repair. The post-push static-host response check remains
-the deployment system's responsibility and is recorded once the factory host
-has consumed the pushed commit.
+None.
