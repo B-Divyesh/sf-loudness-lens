@@ -5,7 +5,7 @@
 Repaired the release blockers reported for candidate
 `7885872f2569f6dc46510fb13303a12fc3d0e49a`.
 
-Commit and deployment evidence are added after the final push.
+Repair commit: `6b331e0cfb5fabd80cb356a963736497c27512b8`.
 
 ## What changed
 
