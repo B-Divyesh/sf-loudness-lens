@@ -1,6 +1,6 @@
 # Copy audit
 
-Audited 28 August 2026 after polish round 1. Counts treat hyphenated terms,
+Audited 28 August 2026 after polish round 2. Counts treat hyphenated terms,
 paths, URLs, and version numbers as one word. No sentence exceeds 22 words.
 No copy uses a banned marketing word.
 
@@ -22,7 +22,7 @@ No copy uses a banned marketing word.
 | No account or server setup. | 5 | Pass |
 | Free to use. | 3 | Pass |
 | Plate I · peaks kept below the bell | 7 | Pass |
-| The control in one glance | 5 | Pass |
+| Peak-limit preview | 2 | Pass |
 | See the peak before it surprises you | 7 | Pass |
 | This preview starts with an example reading. | 7 | Pass |
 | Move the peak limit to place the red marker. | 9 | Pass |
@@ -31,7 +31,7 @@ No copy uses a banned marketing word.
 | Example reading: −18 dB, below the −6 dB limit. | 9 | Pass |
 | Peak limit | 2 | Pass |
 | Mute now | 2 | Pass |
-| Three field notes | 3 | Pass |
+| Three steps | 2 | Pass |
 | How it works | 3 | Pass |
 | Open the tab | 3 | Pass |
 | Play the video, lesson, or song you want to guard. | 10 | Pass |
@@ -40,7 +40,7 @@ No copy uses a banned marketing word.
 | Set the peak limit | 4 | Pass |
 | Watch the meter. | 3 | Pass |
 | Use Mute now if sound feels unsafe. | 7 | Pass |
-| Clear boundaries | 2 | Pass |
+| Limits and browser constraints | 4 | Pass |
 | What the guard does not do | 6 | Pass |
 | It starts only when you turn it on for a tab. | 11 | Pass |
 | It does not capture background tabs by itself. | 8 | Pass |
@@ -99,6 +99,8 @@ longest prose sentence is 17 words. The earlier flagged terms were replaced:
 
 The published installation flow is also listed as five separate steps. It
 starts with downloading and extracting the ZIP before opening Chrome settings.
+The “Chrome 116 or newer” requirement is listed in `.factory/claims.json` and
+verified against the production manifest by `@claim:minimum-chrome-version`.
 
 ## Terminology
 
@@ -113,5 +115,5 @@ starts with downloading and extracting the ZIP before opening Chrome settings.
 | Captured browser page | tab |
 | Downloaded package | ZIP |
 
-Catalog description: “Keep each browser tab at a predictable listening
-level.” It is 56 characters, starts with a verb, and contains no banned word.
+Catalog description: “Keep each Chrome tab at a predictable listening level.”
+It is 55 characters, starts with a verb, and contains no banned word.

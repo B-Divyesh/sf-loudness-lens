@@ -88,6 +88,11 @@ describe('extension behavior', () => {
     expect(captureStartError('Capture is blocked')).toContain('Try a normal video or music tab');
   });
 
+  it('@claim:minimum-chrome-version declares Chrome 116 in the built extension manifest', () => {
+    const manifest = JSON.parse(readFileSync('dist/extension/chrome-mv3/manifest.json', 'utf8')) as { minimum_chrome_version?: string };
+    expect(manifest.minimum_chrome_version).toBe('116');
+  });
+
   it('does not update the live meter after the guard has been stopped', () => {
     expect(withMeter(defaultGuardState(), -4, 2)).toEqual(defaultGuardState());
   });

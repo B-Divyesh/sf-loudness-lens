@@ -114,6 +114,16 @@ test('@claim:peak-limit-marker updates the landing marker and mute state', async
   await expect(preview.getByRole('button', { name: 'Mute now' })).toHaveAttribute('aria-pressed', 'false');
 });
 
+test('landing section labels describe the content in plain words', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.product-preview > .section-intro > .kicker')).toHaveText('Peak-limit preview');
+  await expect(page.locator('#how > .kicker')).toHaveText('Three steps');
+  await expect(page.locator('.limits .kicker')).toHaveText('Limits and browser constraints');
+  await expect(page.getByText('The control in one glance')).toHaveCount(0);
+  await expect(page.getByText('Three field notes')).toHaveCount(0);
+  await expect(page.getByText('Clear boundaries')).toHaveCount(0);
+});
+
 for (const route of ['/', '/demo', '/privacy', '/terms', '/missing']) {
   test(`page structure and accessibility: ${route}`, async ({ page }) => {
     const errors: string[] = [];
