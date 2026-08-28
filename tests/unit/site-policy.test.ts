@@ -3,7 +3,6 @@ import { readFileSync } from 'node:fs';
 
 it('ships immutable asset cache policy and a real static 404 response', () => {
   const config = JSON.parse(readFileSync('site/public/staticwebapp.config.json', 'utf8'));
-  expect(config.navigationFallback).toEqual(expect.objectContaining({ rewrite: '/index.html' }));
   expect(config.routes).toEqual(expect.arrayContaining([
     expect.objectContaining({ route: '/assets/*', headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }),
     expect.objectContaining({ route: '/downloads/*', headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }),

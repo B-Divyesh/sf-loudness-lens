@@ -1,5 +1,4 @@
 {
-  "navigationFallback": { "rewrite": "/index.html", "exclude": ["/assets/*", "/downloads/*", "/*.xml", "/*.txt", "/404.html"] },
   "routes": [
     { "route": "/", "rewrite": "/index.html" },
     { "route": "/demo", "rewrite": "/index.html" },
