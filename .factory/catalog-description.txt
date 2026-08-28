@@ -1,1 +1,1 @@
-Limit sudden peaks in the Chrome tab you enable.
+Limit sudden peaks in the tab you enable.

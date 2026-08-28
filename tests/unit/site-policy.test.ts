@@ -49,6 +49,20 @@ it('keeps the public promise and Chrome install instructions aligned with peak l
   expect(manifest).toContain("description: 'Limit sudden peaks in the tab you enable.'");
 });
 
+it('keeps preview and both 404 renderers free of decorative copy', () => {
+  const landing = readFileSync('site/src/main.ts', 'utf8');
+  const staticNotFound = readFileSync('site/src/404.ts', 'utf8');
+  for (const source of [landing, staticNotFound]) {
+    expect(source).not.toContain('This specimen is not in the guide');
+    expect(source).not.toContain('Field note 404');
+    expect(source).toContain('Page not found');
+  }
+  expect(landing).toContain('Preview the selected peak limit');
+  expect(landing).toContain('>Active tab</span>');
+  expect(landing).not.toContain('See the peak before it surprises you');
+  expect(landing).not.toContain('SPECIMEN 01');
+});
+
 it('lists every claim once and connects it to exactly one tagged test', () => {
   const claims = JSON.parse(readFileSync('.factory/claims.json', 'utf8')) as Array<{ id: string; test: string }>;
   const sources = [

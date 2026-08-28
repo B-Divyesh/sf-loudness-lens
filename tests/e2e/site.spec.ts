@@ -134,6 +134,20 @@ test('landing section labels describe the content in plain words', async ({ page
   await expect(page.getByText('Clear boundaries')).toHaveCount(0);
 });
 
+test('preview and 404 copy names the content without field-guide lore', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#preview-title')).toHaveText('Preview the selected peak limit');
+  await expect(page.locator('.lens-panel .specimen-no')).toHaveText('Active tab');
+  await expect(page.locator('body')).not.toContainText('See the peak before it surprises you');
+  await expect(page.locator('body')).not.toContainText('Specimen 01');
+
+  await page.goto('/missing');
+  await expect(page.locator('h1')).toHaveText('Page not found');
+  await expect(page.locator('.not-found .kicker')).toHaveCount(0);
+  await expect(page.locator('body')).not.toContainText('This specimen is not in the guide');
+  await expect(page.locator('body')).not.toContainText('Field note 404');
+});
+
 for (const route of ['/', '/demo', '/privacy', '/terms', '/missing']) {
   test(`page structure and accessibility: ${route}`, async ({ page }) => {
     const errors: string[] = [];

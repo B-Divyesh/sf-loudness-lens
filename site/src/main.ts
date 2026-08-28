@@ -23,7 +23,7 @@ function shell(content: string, demo = false) {
 
 function meterMarkup(prefix = 'preview', note = 'Example reading: −18 dB, below the −6 dB limit.') {
   return `<section class="lens-panel" aria-labelledby="${prefix}-meter-title">
-    <div class="panel-heading"><div><span class="specimen-no">SPECIMEN 01 · ACTIVE TAB</span><h2 id="${prefix}-meter-title">Live peak</h2></div><output id="${prefix}-peak">−18 dB</output></div>
+    <div class="panel-heading"><div><span class="specimen-no">Active tab</span><h2 id="${prefix}-meter-title">Live peak</h2></div><output id="${prefix}-peak">−18 dB</output></div>
     <div class="meter"><meter class="meter-gauge" aria-label="Sample audio peak" min="-60" max="0" value="-18">−18 dB</meter><i class="meter-limit limit-6"></i></div>
     <p class="meter-note" aria-live="polite">${note}</p>
     <div class="control-line"><span>Peak limit</span><strong class="ceiling-readout">−6 dB</strong></div>
@@ -36,7 +36,7 @@ function home() {
   return shell(`<main id="main">
     <section class="hero"><div class="hero-copy"><p class="kicker">A per-tab peak limiter</p><h1 tabindex="-1">Limit sudden peaks in the tab you enable</h1><p class="dek">For people switching between videos, lessons, and music who want fewer sudden volume jumps.</p><div class="hero-actions"><a class="button primary" href="/?demo=1" data-link>Try it with sample data</a><span>Keep sudden peaks below your chosen limit.</span></div><ul class="plain-facts"><li>Audio never leaves your browser.</li><li>No account or server setup.</li><li>Free to use.</li></ul></div>
     <figure class="hero-art"><picture><source srcset="/assets/loudness-botanical-640-v1.webp 640w, /assets/loudness-botanical-1200-v1.webp 1200w" sizes="(max-width: 800px) 92vw, 48vw" type="image/webp"><img src="/assets/loudness-botanical-1200-v1.webp" width="1200" height="800" alt="A pressed fern waveform sits beneath a protective glass bell." fetchpriority="high" decoding="async"></picture><figcaption>Illustration of peak limiting.</figcaption></figure></section>
-    <section class="product-preview" aria-labelledby="preview-title"><div class="section-intro"><p class="kicker">Peak-limit preview</p><h2 id="preview-title">See the peak before it surprises you</h2><p>This preview starts with an example reading. Move the peak limit to place the red marker.</p></div>${meterMarkup()}</section>
+    <section class="product-preview" aria-labelledby="preview-title"><div class="section-intro"><p class="kicker">Peak-limit preview</p><h2 id="preview-title">Preview the selected peak limit</h2><p>This preview starts with an example reading. Move the peak limit to place the red marker.</p></div>${meterMarkup()}</section>
     <section id="how" class="how" aria-labelledby="how-title"><p class="kicker">Three steps</p><h2 id="how-title">How it works</h2><ol><li><span>01</span><div><h3>Open the tab</h3><p>Play the video, lesson, or song you want to guard.</p></div></li><li><span>02</span><div><h3>Turn on the guard</h3><p>The extension asks Chrome for that tab’s audio only.</p></div></li><li><span>03</span><div><h3>Set the peak limit</h3><p>Watch the meter. Use Mute now if sound feels unsafe.</p></div></li></ol></section>
     <section class="limits" aria-labelledby="limits-title"><div><p class="kicker">Limits and browser constraints</p><h2 id="limits-title">What the guard does not do</h2></div><ul><li>It starts only when you turn it on for a tab.</li><li>It does not capture background tabs by itself.</li><li>Some tabs cannot provide audio to Chrome extensions.</li><li>It cannot guarantee a safe listening level.</li></ul></section>
     <section class="install"><p class="kicker">Chrome extension · v1</p><h2>Install the extension in Chrome</h2><ol class="install-steps"><li>Download the ZIP.</li><li>Extract the ZIP.</li><li>Open <code>chrome://extensions</code>.</li><li>Turn on <strong>Developer mode</strong>.</li><li>Choose <strong>Load unpacked</strong> and select the extracted folder.</li><li>Open the Extensions menu, then pin Loudness Lens to the toolbar.</li></ol><a class="button primary" href="/downloads/loudness-lens-chrome-1.0.0.zip" download>Download Loudness Lens</a></section>
@@ -56,7 +56,7 @@ function terms() {
 }
 
 function notFound() {
-  return shell(`<main id="main" class="not-found"><div class="lost-plant" aria-hidden="true">⌇</div><p class="kicker">Field note 404</p><h1 tabindex="-1">This specimen is not in the guide</h1><p>The address may be old or mistyped.</p><a class="button primary" href="/" data-link>Return to Loudness Lens</a></main>`);
+  return shell(`<main id="main" class="not-found"><div class="lost-plant" aria-hidden="true">⌇</div><h1 tabindex="-1">Page not found</h1><p>The address may be old or mistyped.</p><a class="button primary" href="/" data-link>Return to Loudness Lens</a></main>`);
 }
 
 const routes: Record<string, { title: string; description: string; render: () => string }> = {
