@@ -12,7 +12,7 @@ Audio is processed inside Chrome and is never recorded or uploaded.
 Open `/demo` on the site, or run the site and visit
 `http://localhost:5173/demo`. The shipped 12-second lesson sample contains two
 volume jumps. Demo settings use the separate `demo:loudness-lens:v1` storage
-key. **Reset demo** clears it.
+key. **Reset demo** restores the defaults. Leaving the demo discards its key.
 
 ## Requirements
 

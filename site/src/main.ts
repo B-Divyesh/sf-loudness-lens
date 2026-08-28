@@ -4,6 +4,7 @@ type DemoState = { ceiling: number; trim: number; muted: boolean };
 const DEMO_KEY = 'demo:loudness-lens:v1';
 const defaultDemo: DemoState = { ceiling: -6, trim: 0, muted: false };
 let audioSession: { context: AudioContext; analyser: AnalyserNode; gain: GainNode; limiter: DynamicsCompressorNode; audio: HTMLAudioElement; frame: number } | undefined;
+let activePath = location.pathname;
 
 const app = document.querySelector<HTMLElement>('#app')!;
 const announcer = document.querySelector<HTMLElement>('#announcer')!;
@@ -70,6 +71,8 @@ function loadDemoState(): DemoState {
 }
 
 function saveDemoState(state: DemoState) { localStorage.setItem(DEMO_KEY, JSON.stringify(state)); }
+
+function discardDemoState() { localStorage.removeItem(DEMO_KEY); }
 
 function stopAudio() {
   if (!audioSession) return;
@@ -145,8 +148,8 @@ async function setupDemo() {
   audio.addEventListener('ended', () => { play.textContent = 'Replay sample'; document.querySelector('#sample-status')!.textContent = 'Sample finished.'; });
   trim.addEventListener('input', apply); ceiling.addEventListener('input', apply);
   mute.addEventListener('click', () => { mute.classList.toggle('active'); mute.innerHTML = mute.classList.contains('active') ? '<span aria-hidden="true">↗</span> Restore sound' : '<span aria-hidden="true">×</span> Mute now'; apply(); });
-  document.querySelector('#reset-demo')?.addEventListener('click', () => { localStorage.removeItem(DEMO_KEY); stopAudio(); render('/demo', true); });
-  document.querySelector('#start-real')?.addEventListener('click', () => localStorage.removeItem(DEMO_KEY));
+  document.querySelector('#reset-demo')?.addEventListener('click', () => { discardDemoState(); stopAudio(); render('/demo', true); });
+  document.querySelector('#start-real')?.addEventListener('click', discardDemoState);
   apply();
 }
 
@@ -156,7 +159,7 @@ function wireLinks() {
     const url = new URL(link.href);
     if (url.origin !== location.origin) return;
     event.preventDefault();
-    if (location.pathname === '/demo' && url.pathname !== '/demo') localStorage.removeItem(DEMO_KEY);
+    if (location.pathname === '/demo' && url.pathname !== '/demo') discardDemoState();
     history.pushState({}, '', url.pathname + url.hash);
     render(url.pathname, true);
     if (url.hash) setTimeout(() => document.querySelector(url.hash)?.scrollIntoView(), 0);
@@ -182,7 +185,14 @@ function render(path = location.pathname, focusHeading = false) {
   announcer.textContent = heading?.textContent ?? '';
   if (focusHeading) requestAnimationFrame(() => heading?.focus({ preventScroll: true }));
   scrollTo({ top: 0, behavior: 'instant' });
+  activePath = path;
 }
 
-addEventListener('popstate', () => render(location.pathname, true));
+addEventListener('popstate', () => {
+  if (activePath === '/demo' && location.pathname !== '/demo') discardDemoState();
+  render(location.pathname, true);
+});
+addEventListener('pagehide', () => {
+  if (activePath === '/demo') discardDemoState();
+});
 render();

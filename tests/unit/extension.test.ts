@@ -70,4 +70,8 @@ describe('extension boundaries', () => {
     expect(background).toContain('chrome.storage.session');
     expect(`${background}\n${offscreen}\n${popup}`).not.toMatch(/analytics|sendBeacon|XMLHttpRequest|fetch\(/i);
   });
+  it('gives both extension range controls a 44 px keyboard and touch target', () => {
+    const styles = readFileSync('entrypoints/popup/style.css', 'utf8');
+    expect(styles).toMatch(/input\[type="range"\][\s\S]*?height:\s*44px/);
+  });
 });

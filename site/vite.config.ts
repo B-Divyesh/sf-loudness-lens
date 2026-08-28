@@ -8,5 +8,11 @@ export default defineConfig({
     outDir: resolve(import.meta.dirname, '../dist/site'),
     emptyOutDir: true,
     target: 'es2022',
+    rollupOptions: {
+      input: {
+        main: resolve(import.meta.dirname, 'index.html'),
+        notFound: resolve(import.meta.dirname, '404.html'),
+      },
+    },
   },
 });

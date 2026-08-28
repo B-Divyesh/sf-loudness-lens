@@ -84,6 +84,8 @@ input {
 .wordmark {
   display: flex;
   align-items: center;
+  min-height: 44px;
+  min-width: 44px;
   gap: 10px;
   font:
     700 19px Georgia,
@@ -131,10 +133,16 @@ input {
   color: inherit;
   text-decoration: underline;
   cursor: pointer;
-  min-height: 32px;
+  min-height: 44px;
+  min-width: 44px;
 }
 .demo-banner a {
   color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
 }
 main {
   display: block;
@@ -539,6 +547,13 @@ footer p {
 footer nav {
   display: flex;
   gap: 22px;
+}
+footer nav a,
+.prose a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
 }
 .build {
   grid-column: 1/-1;

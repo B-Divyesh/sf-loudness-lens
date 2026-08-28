@@ -206,7 +206,7 @@ label output {
 input[type="range"] {
   width: 100%;
   accent-color: var(--fern);
-  height: 28px;
+  height: 44px;
   margin: 0;
 }
 .range-labels {
