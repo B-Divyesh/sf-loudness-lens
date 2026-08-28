@@ -1,0 +1,225 @@
+{
+  "routes": {
+    "/@390": {
+      "status": 200,
+      "title": "Loudness Lens — limit sudden tab peaks",
+      "lang": "en",
+      "h1": [
+        "Limit sudden peaks in the tab you enable"
+      ],
+      "main": 1,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "description": "Limit sudden peaks in the tab you enable. Set a peak limit, then mute it when needed.",
+      "canonical": "https://loudness-lens.sociobot.in/",
+      "robots": null,
+      "serious": [],
+      "errors": []
+    },
+    "/demo@390": {
+      "status": 200,
+      "title": "Demo — Loudness Lens",
+      "lang": "en",
+      "h1": [
+        "Control a sample tab"
+      ],
+      "main": 1,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "description": "Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.",
+      "canonical": "https://loudness-lens.sociobot.in/demo",
+      "robots": null,
+      "serious": [],
+      "errors": []
+    },
+    "/privacy@390": {
+      "status": 200,
+      "title": "Privacy — Loudness Lens",
+      "lang": "en",
+      "h1": [
+        "Your audio stays on your device"
+      ],
+      "main": 1,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "description": "Read what Loudness Lens stores, how tab audio stays on your device, and how demo data is separated and discarded.",
+      "canonical": "https://loudness-lens.sociobot.in/privacy",
+      "robots": null,
+      "serious": [],
+      "errors": []
+    },
+    "/terms@390": {
+      "status": 200,
+      "title": "Terms — Loudness Lens",
+      "lang": "en",
+      "h1": [
+        "Use Loudness Lens as a listening aid"
+      ],
+      "main": 1,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "description": "Read the terms, browser limits, and listening-safety boundaries for the free Loudness Lens Chrome extension.",
+      "canonical": "https://loudness-lens.sociobot.in/terms",
+      "robots": null,
+      "serious": [],
+      "errors": []
+    },
+    "/missing@390": {
+      "status": 404,
+      "title": "Page not found — Loudness Lens",
+      "lang": "en",
+      "h1": [
+        "Page not found"
+      ],
+      "main": 1,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "description": "The requested Loudness Lens page was not found.",
+      "canonical": null,
+      "robots": "noindex",
+      "serious": [],
+      "errors": []
+    },
+    "/@195": {
+      "status": 200,
+      "title": "Loudness Lens — limit sudden tab peaks",
+      "lang": "en",
+      "h1": [
+        "Limit sudden peaks in the tab you enable"
+      ],
+      "main": 1,
+      "scrollWidth": 195,
+      "innerWidth": 195,
+      "description": "Limit sudden peaks in the tab you enable. Set a peak limit, then mute it when needed.",
+      "canonical": "https://loudness-lens.sociobot.in/",
+      "robots": null,
+      "serious": [],
+      "errors": []
+    },
+    "/demo@195": {
+      "status": 200,
+      "title": "Demo — Loudness Lens",
+      "lang": "en",
+      "h1": [
+        "Control a sample tab"
+      ],
+      "main": 1,
+      "scrollWidth": 195,
+      "innerWidth": 195,
+      "description": "Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.",
+      "canonical": "https://loudness-lens.sociobot.in/demo",
+      "robots": null,
+      "serious": [],
+      "errors": []
+    },
+    "/privacy@195": {
+      "status": 200,
+      "title": "Privacy — Loudness Lens",
+      "lang": "en",
+      "h1": [
+        "Your audio stays on your device"
+      ],
+      "main": 1,
+      "scrollWidth": 195,
+      "innerWidth": 195,
+      "description": "Read what Loudness Lens stores, how tab audio stays on your device, and how demo data is separated and discarded.",
+      "canonical": "https://loudness-lens.sociobot.in/privacy",
+      "robots": null,
+      "serious": [],
+      "errors": []
+    },
+    "/terms@195": {
+      "status": 200,
+      "title": "Terms — Loudness Lens",
+      "lang": "en",
+      "h1": [
+        "Use Loudness Lens as a listening aid"
+      ],
+      "main": 1,
+      "scrollWidth": 195,
+      "innerWidth": 195,
+      "description": "Read the terms, browser limits, and listening-safety boundaries for the free Loudness Lens Chrome extension.",
+      "canonical": "https://loudness-lens.sociobot.in/terms",
+      "robots": null,
+      "serious": [],
+      "errors": []
+    },
+    "/missing@195": {
+      "status": 404,
+      "title": "Page not found — Loudness Lens",
+      "lang": "en",
+      "h1": [
+        "Page not found"
+      ],
+      "main": 1,
+      "scrollWidth": 195,
+      "innerWidth": 195,
+      "description": "The requested Loudness Lens page was not found.",
+      "canonical": null,
+      "robots": "noindex",
+      "serious": [],
+      "errors": []
+    }
+  },
+  "findings": {
+    "F-4-1": {
+      "heading": "Preview the selected peak limit",
+      "oldCount": 0
+    },
+    "F-4-2": {
+      "label": "Active tab",
+      "oldCount": 0
+    },
+    "F-4-3": {
+      "h1": "Page not found",
+      "kickerRemoved": true,
+      "status": 404
+    }
+  },
+  "demo": {
+    "entry": {
+      "url": "https://loudness-lens.sociobot.in/?demo=1",
+      "banner": "Demo — sample data, nothing is saved\nReset demo\nDownload the extension ZIP",
+      "h1": "Control a sample tab",
+      "initial": "The sample is ready. Play it to see the peak."
+    },
+    "changed": {
+      "keys": [
+        "demo:loudness-lens:v1",
+        "real:sentinel"
+      ],
+      "sentinel": "untouched"
+    },
+    "reset": {
+      "trim": "0",
+      "ceiling": "-6",
+      "mute": "false"
+    },
+    "playing": {
+      "time": 0.214785,
+      "status": "Playing through the local limiter."
+    },
+    "exit": {
+      "url": "https://loudness-lens.sociobot.in/",
+      "demoKey": null,
+      "sentinel": "untouched"
+    }
+  },
+  "routing": {
+    "url": "https://loudness-lens.sociobot.in/#how",
+    "focus": "Limit sudden peaks in the tab you enable",
+    "announcement": "Limit sudden peaks in the tab you enable",
+    "sectionTop": 1
+  },
+  "privacy": {
+    "origins": [
+      "https://loudness-lens.sociobot.in"
+    ],
+    "foreign": []
+  },
+  "errors": [],
+  "dark": {
+    "serious": [],
+    "scrollBehavior": "auto"
+  }
+}

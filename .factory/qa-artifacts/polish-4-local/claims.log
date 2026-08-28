@@ -1,0 +1,54 @@
+
+===== local-only =====
+npm run test:e2e -- --grep @claim:local-only
+
+===== sample-limiter =====
+npm run test:e2e -- --grep @claim:sample-limiter
+
+===== sample-timing =====
+npm run test:e2e -- --grep @claim:sample-timing
+
+===== demo-isolation =====
+npm run test:e2e -- --grep @claim:demo-isolation
+
+===== demo-reset =====
+npm run test:e2e -- --grep @claim:demo-reset
+
+===== demo-discard =====
+npm run test:e2e -- --grep @claim:demo-discard
+
+===== free-download =====
+npm run test:e2e -- --grep @claim:free-download
+
+===== per-tab-peak-limit =====
+npm run test:unit -- --testNamePattern @claim:per-tab-peak-limit
+
+===== peak-limit-marker =====
+npm run test:e2e -- --grep @claim:peak-limit-marker
+
+===== tab-consent =====
+npm run test:unit -- --testNamePattern @claim:tab-consent
+
+===== panic-mute =====
+npm run test:unit -- --testNamePattern @claim:panic-mute
+
+===== look-ahead-limiter =====
+npm run test:unit -- --testNamePattern @claim:look-ahead-limiter
+
+===== live-meter =====
+npm run test:unit -- --testNamePattern @claim:live-meter
+
+===== level-trim =====
+npm run test:unit -- --testNamePattern @claim:level-trim
+
+===== capture-lifecycle =====
+npm run test:unit -- --testNamePattern @claim:capture-lifecycle
+
+===== local-settings =====
+npm run test:unit -- --testNamePattern @claim:local-settings
+
+===== capture-error =====
+npm run test:unit -- --testNamePattern @claim:capture-error
+
+===== minimum-chrome-version =====
+npm run test:unit -- --testNamePattern @claim:minimum-chrome-version

@@ -1,6 +1,6 @@
 # Copy audit
 
-Audited 28 August 2026 for polish round 3. Counts treat hyphenated terms,
+Audited 28 August 2026 for polish round 4. Counts treat hyphenated terms,
 paths, URLs, and version numbers as one word. No sentence exceeds 22 words.
 No copy uses a banned marketing word.
 
@@ -8,6 +8,7 @@ No copy uses a banned marketing word.
 
 | Copy unit | Words | Result |
 | --- | ---: | --- |
+| Skip to main content | 4 | Pass |
 | Loudness Lens | 2 | Pass |
 | Demo | 1 | Pass |
 | How it works | 3 | Pass |
@@ -21,12 +22,13 @@ No copy uses a banned marketing word.
 | Audio never leaves your browser. | 5 | `local-only` |
 | No account or server setup. | 5 | `free-download` |
 | Free to use. | 3 | `free-download` |
+| A pressed fern waveform sits beneath a protective glass bell. | 10 | Useful art alt text |
 | Illustration of peak limiting. | 4 | Art caption |
 | Peak-limit preview | 2 | Pass |
-| See the peak before it surprises you | 7 | Pass |
+| Preview the selected peak limit | 5 | Pass |
 | This preview starts with an example reading. | 7 | Pass |
 | Move the peak limit to place the red marker. | 9 | `peak-limit-marker` |
-| Specimen 01 · active tab | 4 | Pass |
+| Active tab | 2 | Pass |
 | Live peak | 2 | `live-meter` |
 | Example reading: −18 dB, below the −6 dB limit. | 9 | Explicit example |
 | Peak limit | 2 | Pass |
@@ -64,6 +66,17 @@ The first screen reads aloud in one breath: the job headline, audience
 sentence, sample action, and its immediate result are concrete and complete.
 The product promises peak limiting only for the tab a person enables. It does
 not promise steady-volume normalisation or support for every tab.
+
+## Page not found
+
+| Copy unit | Words | Result |
+| --- | ---: | --- |
+| Page not found | 3 | Pass |
+| The address may be old or mistyped. | 7 | Pass |
+| Return to Loudness Lens | 4 | Pass |
+
+The h1 states the error directly. The botanical mark remains decorative, and
+no field-guide label asks the visitor to decode the visual theme.
 
 ## Demo and state copy
 
@@ -129,5 +142,5 @@ step after loading the extension.
 | Captured browser page | tab |
 | Downloaded package | ZIP |
 
-Catalog description: “Limit sudden peaks in the Chrome tab you enable.” It is
-48 characters, starts with a verb, and contains no banned word.
+Catalog description: “Limit sudden peaks in the tab you enable.” It is 41
+characters, starts with a verb, and contains no banned word.

@@ -1,0 +1,37 @@
+{
+  "home-desktop": {
+    "title": "Loudness Lens — limit sudden tab peaks",
+    "h1": "Limit sudden peaks in the tab you enable",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "errors": []
+  },
+  "home-mobile": {
+    "title": "Loudness Lens — limit sudden tab peaks",
+    "h1": "Limit sudden peaks in the tab you enable",
+    "width": 390,
+    "scrollWidth": 390,
+    "errors": []
+  },
+  "demo-mobile": {
+    "title": "Demo — Loudness Lens",
+    "h1": "Control a sample tab",
+    "width": 390,
+    "scrollWidth": 390,
+    "errors": []
+  },
+  "missing-mobile": {
+    "title": "Page not found — Loudness Lens",
+    "h1": "Page not found",
+    "width": 390,
+    "scrollWidth": 390,
+    "errors": []
+  },
+  "missing-reflow": {
+    "title": "Page not found — Loudness Lens",
+    "h1": "Page not found",
+    "width": 195,
+    "scrollWidth": 195,
+    "errors": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scores": {
+    "performance": 99,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "fcp": "1.0 s",
+    "lcp": "1.7 s",
+    "tbt": "100 ms",
+    "cls": "0"
+  },
+  "totalBytes": "Total size was 96 KiB"
+}

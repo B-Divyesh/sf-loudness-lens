@@ -1,0 +1,16 @@
+Archive:  dist/site/downloads/loudness-lens-chrome-1.0.0.zip
+    testing: assets/popup-_GC9S_Fl.css   OK
+    testing: background.js            OK
+    testing: chunks/audio-ClmpGlDn.js   OK
+    testing: chunks/offscreen-BxlhWenw.js   OK
+    testing: chunks/popup-BacYsD5z.js   OK
+    testing: icons/icon-128.png       OK
+    testing: icons/icon-16.png        OK
+    testing: icons/icon-32.png        OK
+    testing: icons/icon-48.png        OK
+    testing: icons/mark.svg           OK
+    testing: limiter-worklet.js       OK
+    testing: manifest.json            OK
+    testing: offscreen.html           OK
+    testing: popup.html               OK
+No errors detected in compressed data of dist/site/downloads/loudness-lens-chrome-1.0.0.zip.

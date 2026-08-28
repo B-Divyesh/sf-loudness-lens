@@ -1,0 +1,64 @@
+
+> loudness-lens@1.0.0 test:unit
+> npm run build:extension && vitest run --testNamePattern @claim:minimum-chrome-version
+
+
+> loudness-lens@1.0.0 build:extension
+> wxt build && wxt zip
+
+[log] 
+WXT 0.21.4
+[info] Building chrome-mv3 for production with Vite 6.4.3
+[?25l⠋ Preparing...[K⠋ [1/2] background[K⠙ [1/2] background[K⠹ [1/2] background[K⠹ [2/2] offscreen, popup[K⠸ [2/2] offscreen, popup[K[K[?25h[K[?25h[success] Built extension in 497 ms
+  ├─ dist/extension/chrome-mv3/manifest.json                 470 B   
+  ├─ dist/extension/chrome-mv3/offscreen.html                295 B   
+  ├─ dist/extension/chrome-mv3/popup.html                    2.40 kB 
+  ├─ dist/extension/chrome-mv3/background.js                 3.93 kB 
+  ├─ dist/extension/chrome-mv3/chunks/audio-ClmpGlDn.js      1.06 kB 
+  ├─ dist/extension/chrome-mv3/chunks/offscreen-BxlhWenw.js  1.96 kB 
+  ├─ dist/extension/chrome-mv3/chunks/popup-BacYsD5z.js      2.41 kB 
+  ├─ dist/extension/chrome-mv3/limiter-worklet.js            2.23 kB 
+  ├─ dist/extension/chrome-mv3/assets/popup-_GC9S_Fl.css     5.03 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-128.png            32.50 kB
+  ├─ dist/extension/chrome-mv3/icons/icon-16.png             1.04 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-32.png             2.28 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-48.png             4.68 kB 
+  └─ dist/extension/chrome-mv3/icons/mark.svg                418 B   
+Σ Total size: 60.71 kB                                     
+[success] Finished in 721 ms
+[log] 
+WXT 0.21.4
+[info] Building chrome-mv3 for production with Vite 6.4.3
+[?25l⠋ Preparing...[K⠋ [1/2] background[K⠙ [1/2] background[K⠹ [1/2] background[K⠹ [2/2] offscreen, popup[K⠸ [2/2] offscreen, popup[K[K[?25h[K[?25h[success] Built extension in 489 ms
+  ├─ dist/extension/chrome-mv3/manifest.json                 470 B   
+  ├─ dist/extension/chrome-mv3/offscreen.html                295 B   
+  ├─ dist/extension/chrome-mv3/popup.html                    2.40 kB 
+  ├─ dist/extension/chrome-mv3/background.js                 3.93 kB 
+  ├─ dist/extension/chrome-mv3/chunks/audio-ClmpGlDn.js      1.06 kB 
+  ├─ dist/extension/chrome-mv3/chunks/offscreen-BxlhWenw.js  1.96 kB 
+  ├─ dist/extension/chrome-mv3/chunks/popup-BacYsD5z.js      2.41 kB 
+  ├─ dist/extension/chrome-mv3/limiter-worklet.js            2.23 kB 
+  ├─ dist/extension/chrome-mv3/assets/popup-_GC9S_Fl.css     5.03 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-128.png            32.50 kB
+  ├─ dist/extension/chrome-mv3/icons/icon-16.png             1.04 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-32.png             2.28 kB 
+  ├─ dist/extension/chrome-mv3/icons/icon-48.png             4.68 kB 
+  └─ dist/extension/chrome-mv3/icons/mark.svg                418 B   
+Σ Total size: 60.71 kB                                     
+[info] Zipping extension...
+[success] Zipped extension in 19 ms
+  └─ dist/extension/loudness-lens-1.0.0-chrome.zip  50.55 kB
+Σ Total size: 50.55 kB                            
+[success] Finished in 718 ms
+
+ RUN  v3.2.7 /tmp/loudness-lens-polish-4-clean.73rwT6/repo
+
+ ↓ tests/unit/audio.test.ts (3 tests | 3 skipped)
+ ↓ tests/unit/site-policy.test.ts (5 tests | 5 skipped)
+ ✓ tests/unit/extension.test.ts (11 tests | 10 skipped) 2ms
+
+ Test Files  1 passed | 2 skipped (3)
+      Tests  1 passed | 18 skipped (19)
+   Start at  21:49:31
+   Duration  749ms (transform 223ms, setup 0ms, collect 413ms, tests 2ms, environment 1ms, prepare 609ms)
+
