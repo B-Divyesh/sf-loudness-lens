@@ -37,6 +37,18 @@ it('packages an installable extension folder at the ZIP root', () => {
   expect(manifest.name).toBe('Loudness Lens');
 });
 
+it('keeps the public promise and Chrome install instructions aligned with peak limiting', () => {
+  const landing = readFileSync('site/src/main.ts', 'utf8');
+  const readme = readFileSync('README.md', 'utf8');
+  const manifest = readFileSync('wxt.config.ts', 'utf8');
+  expect(landing).toContain('Limit sudden peaks in the tab you enable');
+  expect(landing).toContain('Open the Extensions menu, then pin Loudness Lens to the toolbar.');
+  expect(landing).not.toMatch(/steady volume|predictable listening level/i);
+  expect(readme).toContain('Limit sudden peaks in the tab you enable.');
+  expect(readme).toContain('Open the Extensions menu, then pin Loudness Lens to the toolbar.');
+  expect(manifest).toContain("description: 'Limit sudden peaks in the tab you enable.'");
+});
+
 it('lists every claim once and connects it to exactly one tagged test', () => {
   const claims = JSON.parse(readFileSync('.factory/claims.json', 'utf8')) as Array<{ id: string; test: string }>;
   const sources = [

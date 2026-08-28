@@ -1,6 +1,6 @@
 # Loudness Lens
 
-Keep each browser tab at a predictable listening level.
+Limit sudden peaks in the tab you enable.
 
 Loudness Lens is a free Chrome extension for mixed videos, lessons, and music.
 It captures only the tab you enable. The extension turns down sudden peaks
@@ -40,6 +40,7 @@ To install the published ZIP:
 3. Open `chrome://extensions`.
 4. Turn on **Developer mode**.
 5. Choose **Load unpacked** and select the extracted folder.
+6. Open the Extensions menu, then pin Loudness Lens to the toolbar.
 
 ## Test and build
 

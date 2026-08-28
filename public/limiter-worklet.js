@@ -30,7 +30,10 @@ class LookAheadLimiter extends AudioWorkletProcessor {
         peak = Math.max(peak, Math.abs(input[channel][i] || 0));
       }
       const wanted = peak > this.ceiling ? this.ceiling / peak : 1;
-      this.envelope = wanted < this.envelope
+      // Hold the required reduction for sustained loud input. Releasing while
+      // a sample still exceeds the ceiling would let later delayed samples
+      // creep above the selected peak limit.
+      this.envelope = wanted <= this.envelope
         ? wanted
         : Math.min(1, this.envelope + (1 - this.envelope) * 0.0025);
       const delayedGain = this.gainBuffer[this.index] || 1;

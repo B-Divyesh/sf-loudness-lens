@@ -1,1 +1,1 @@
-Keep each Chrome tab at a predictable listening level.
+Limit sudden peaks in the Chrome tab you enable.

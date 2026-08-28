@@ -8,7 +8,7 @@ export default defineConfig({
   }),
   manifest: {
     name: 'Loudness Lens',
-    description: 'Keep each browser tab at a predictable listening level.',
+    description: 'Limit sudden peaks in the tab you enable.',
     version: '1.0.0',
     permissions: ['activeTab', 'storage', 'tabCapture', 'offscreen'],
     minimum_chrome_version: '116',

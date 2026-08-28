@@ -14,7 +14,7 @@ function header() {
 }
 
 function footer() {
-  return `<footer><div><strong>Loudness Lens</strong><p>Keep each browser tab at a predictable listening level.</p></div><nav aria-label="Footer navigation"><a href="/privacy" data-link>Privacy</a><a href="/terms" data-link>Terms</a><a href="https://sociobot.in" rel="noreferrer">Built by Param Factory <span aria-hidden="true">↗</span><span class="external-label">external site</span></a></nav><p class="build">v1.0.0 · Original generated botanical artwork</p></footer>`;
+  return `<footer><div><strong>Loudness Lens</strong><p>Limit sudden peaks in the tab you enable.</p></div><nav aria-label="Footer navigation"><a href="/privacy" data-link>Privacy</a><a href="/terms" data-link>Terms</a><a href="https://sociobot.in" rel="noreferrer">Built by Param Factory <span aria-hidden="true">↗</span><span class="external-label">external site</span></a></nav><p class="build">v1.0.0 · Original generated botanical artwork</p></footer>`;
 }
 
 function shell(content: string, demo = false) {
@@ -34,12 +34,12 @@ function meterMarkup(prefix = 'preview', note = 'Example reading: −18 dB, belo
 
 function home() {
   return shell(`<main id="main">
-    <section class="hero"><div class="hero-copy"><p class="kicker">A per-tab volume guard</p><h1 tabindex="-1">Keep every tab at a steady volume</h1><p class="dek">For people switching between videos, lessons, and music who want fewer sudden volume jumps.</p><div class="hero-actions"><a class="button primary" href="/?demo=1" data-link>Try it with sample data</a><span>Hear a sample stay below your chosen volume limit.</span></div><ul class="plain-facts"><li>Audio never leaves your browser.</li><li>No account or server setup.</li><li>Free to use.</li></ul></div>
-    <figure class="hero-art"><picture><source srcset="/assets/loudness-botanical-640-v1.webp 640w, /assets/loudness-botanical-1200-v1.webp 1200w" sizes="(max-width: 800px) 92vw, 48vw" type="image/webp"><img src="/assets/loudness-botanical-1200-v1.webp" width="1200" height="800" alt="A pressed fern waveform sits beneath a protective glass bell." fetchpriority="high" decoding="async"></picture><figcaption>Plate I · peaks kept below the bell</figcaption></figure></section>
+    <section class="hero"><div class="hero-copy"><p class="kicker">A per-tab peak limiter</p><h1 tabindex="-1">Limit sudden peaks in the tab you enable</h1><p class="dek">For people switching between videos, lessons, and music who want fewer sudden volume jumps.</p><div class="hero-actions"><a class="button primary" href="/?demo=1" data-link>Try it with sample data</a><span>Keep sudden peaks below your chosen limit.</span></div><ul class="plain-facts"><li>Audio never leaves your browser.</li><li>No account or server setup.</li><li>Free to use.</li></ul></div>
+    <figure class="hero-art"><picture><source srcset="/assets/loudness-botanical-640-v1.webp 640w, /assets/loudness-botanical-1200-v1.webp 1200w" sizes="(max-width: 800px) 92vw, 48vw" type="image/webp"><img src="/assets/loudness-botanical-1200-v1.webp" width="1200" height="800" alt="A pressed fern waveform sits beneath a protective glass bell." fetchpriority="high" decoding="async"></picture><figcaption>Illustration of peak limiting.</figcaption></figure></section>
     <section class="product-preview" aria-labelledby="preview-title"><div class="section-intro"><p class="kicker">Peak-limit preview</p><h2 id="preview-title">See the peak before it surprises you</h2><p>This preview starts with an example reading. Move the peak limit to place the red marker.</p></div>${meterMarkup()}</section>
     <section id="how" class="how" aria-labelledby="how-title"><p class="kicker">Three steps</p><h2 id="how-title">How it works</h2><ol><li><span>01</span><div><h3>Open the tab</h3><p>Play the video, lesson, or song you want to guard.</p></div></li><li><span>02</span><div><h3>Turn on the guard</h3><p>The extension asks Chrome for that tab’s audio only.</p></div></li><li><span>03</span><div><h3>Set the peak limit</h3><p>Watch the meter. Use Mute now if sound feels unsafe.</p></div></li></ol></section>
     <section class="limits" aria-labelledby="limits-title"><div><p class="kicker">Limits and browser constraints</p><h2 id="limits-title">What the guard does not do</h2></div><ul><li>It starts only when you turn it on for a tab.</li><li>It does not capture background tabs by itself.</li><li>Some tabs cannot provide audio to Chrome extensions.</li><li>It cannot guarantee a safe listening level.</li></ul></section>
-    <section class="install"><p class="kicker">Chrome extension · v1</p><h2>Put the guard beside your address bar</h2><ol class="install-steps"><li>Download the ZIP.</li><li>Extract the ZIP.</li><li>Open <code>chrome://extensions</code>.</li><li>Turn on <strong>Developer mode</strong>.</li><li>Choose <strong>Load unpacked</strong> and select the extracted folder.</li></ol><a class="button primary" href="/downloads/loudness-lens-chrome-1.0.0.zip" download>Download Loudness Lens</a></section>
+    <section class="install"><p class="kicker">Chrome extension · v1</p><h2>Install the extension in Chrome</h2><ol class="install-steps"><li>Download the ZIP.</li><li>Extract the ZIP.</li><li>Open <code>chrome://extensions</code>.</li><li>Turn on <strong>Developer mode</strong>.</li><li>Choose <strong>Load unpacked</strong> and select the extracted folder.</li><li>Open the Extensions menu, then pin Loudness Lens to the toolbar.</li></ol><a class="button primary" href="/downloads/loudness-lens-chrome-1.0.0.zip" download>Download Loudness Lens</a></section>
   </main>`);
 }
 
@@ -60,7 +60,7 @@ function notFound() {
 }
 
 const routes: Record<string, { title: string; description: string; render: () => string }> = {
-  '/': { title: 'Loudness Lens — keep browser volume steady', description: 'Keep one browser tab at a steady level with a visible peak limit and a quick mute control.', render: home },
+  '/': { title: 'Loudness Lens — limit sudden tab peaks', description: 'Limit sudden peaks in the tab you enable. Set a peak limit, then mute it when needed.', render: home },
   '/demo': { title: 'Demo — Loudness Lens', description: 'Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.', render: demo },
   '/privacy': { title: 'Privacy — Loudness Lens', description: 'Read what Loudness Lens stores, how tab audio stays on your device, and how demo data is separated and discarded.', render: privacy },
   '/terms': { title: 'Terms — Loudness Lens', description: 'Read the terms, browser limits, and listening-safety boundaries for the free Loudness Lens Chrome extension.', render: terms },

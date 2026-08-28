@@ -114,6 +114,16 @@ test('@claim:peak-limit-marker updates the landing marker and mute state', async
   await expect(preview.getByRole('button', { name: 'Mute now' })).toHaveAttribute('aria-pressed', 'false');
 });
 
+test('the first screen describes a selected-tab peak limiter without a normalization promise', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.hero .kicker')).toHaveText('A per-tab peak limiter');
+  await expect(page.locator('.hero h1')).toHaveText('Limit sudden peaks in the tab you enable');
+  await expect(page.locator('.hero-actions span')).toHaveText('Keep sudden peaks below your chosen limit.');
+  await expect(page.locator('footer > div > p')).toHaveText('Limit sudden peaks in the tab you enable.');
+  await expect(page).toHaveTitle('Loudness Lens — limit sudden tab peaks');
+  await expect(page.locator('body')).not.toContainText(/steady volume|predictable listening level/i);
+});
+
 test('landing section labels describe the content in plain words', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.product-preview > .section-intro > .kicker')).toHaveText('Peak-limit preview');
@@ -189,7 +199,7 @@ test('each route updates its canonical URL', async ({ page }) => {
 
 test('each route sets exact page and sharing metadata', async ({ page }) => {
   const routes: Array<[string, string, string, string]> = [
-    ['/', 'Loudness Lens — keep browser volume steady', 'Keep one browser tab at a steady level with a visible peak limit and a quick mute control.', 'https://loudness-lens.sociobot.in/'],
+    ['/', 'Loudness Lens — limit sudden tab peaks', 'Limit sudden peaks in the tab you enable. Set a peak limit, then mute it when needed.', 'https://loudness-lens.sociobot.in/'],
     ['/demo', 'Demo — Loudness Lens', 'Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.', 'https://loudness-lens.sociobot.in/demo'],
     ['/?demo=1', 'Demo — Loudness Lens', 'Try Loudness Lens with a 12-second local lesson sample. Change the peak limit, hear two volume jumps, mute, and reset.', 'https://loudness-lens.sociobot.in/demo'],
     ['/privacy', 'Privacy — Loudness Lens', 'Read what Loudness Lens stores, how tab audio stays on your device, and how demo data is separated and discarded.', 'https://loudness-lens.sociobot.in/privacy'],
@@ -215,7 +225,7 @@ test('How it works navigation focuses, announces, and scrolls to the home conten
   await page.getByLabel('Main navigation').getByRole('link', { name: 'How it works' }).click();
   await expect(page).toHaveURL(/\/#how$/);
   await expect(page.locator('h1')).toBeFocused();
-  await expect(page.locator('#announcer')).toHaveText('Keep every tab at a steady volume');
+  await expect(page.locator('#announcer')).toHaveText('Limit sudden peaks in the tab you enable');
   await expect.poll(() => page.locator('#how').evaluate((node) => Math.abs(node.getBoundingClientRect().top))).toBeLessThan(2);
 });
 
@@ -230,11 +240,13 @@ test('direct demo entry is isolated, resettable, and honest before playback', as
   expect(await page.evaluate(() => localStorage.getItem('loudness-lens:real'))).toBe('keep');
 });
 
-test('the live download is paired with complete Chrome installation steps', async ({ page }) => {
+test('the live download is paired with complete Chrome installation and pinning steps', async ({ page }) => {
   await page.goto('/');
+  await expect(page.locator('.install h2')).toHaveText('Install the extension in Chrome');
   await expect(page.locator('.install-steps li')).toHaveText([
     'Download the ZIP.', 'Extract the ZIP.', 'Open chrome://extensions.',
     'Turn on Developer mode.', 'Choose Load unpacked and select the extracted folder.',
+    'Open the Extensions menu, then pin Loudness Lens to the toolbar.',
   ]);
   const response = await page.request.get('/downloads/loudness-lens-chrome-1.0.0.zip');
   expect(response.ok()).toBeTruthy();

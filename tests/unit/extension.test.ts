@@ -23,6 +23,30 @@ describe('extension behavior', () => {
     expect(requested).toEqual([42]);
   });
 
+  it('@claim:per-tab-peak-limit reduces a loud enabled tab to its selected peak limit', async () => {
+    const requested: number[] = [];
+    await requestTabStream({ getMediaStreamId: ({ targetTabId }, callback) => { requested.push(targetTabId); callback('stream-for-enabled-tab'); } }, 42, () => undefined);
+    expect(requested).toEqual([42]);
+
+    const ceilings: number[] = [];
+    applyAudioSettings({ ...DEFAULT_SETTINGS, ceilingDb: -12 }, 0, { setTargetAtTime: () => undefined }, { postMessage: ({ ceiling }) => ceilings.push(ceiling) });
+    expect(ceilings).toEqual([dbToGain(-12)]);
+
+    const worklet = readFileSync('public/limiter-worklet.js', 'utf8');
+    let Processor: any;
+    class MockAudioWorkletProcessor { port = { onmessage: null, postMessage: () => undefined }; }
+    runInNewContext(worklet, { sampleRate: 48_000, AudioWorkletProcessor: MockAudioWorkletProcessor, registerProcessor: (_name: string, constructor: unknown) => { Processor = constructor; }, Float32Array, Math });
+    const processor = new Processor({ processorOptions: { ceiling: ceilings[0] } });
+    const rendered: number[] = [];
+    for (let block = 0; block < 7; block += 1) {
+      const input = new Float32Array(128).fill(1);
+      const output = new Float32Array(128);
+      processor.process([[input]], [[output]]);
+      rendered.push(...output);
+    }
+    expect(Math.max(...rendered.slice(480).map(Math.abs))).toBeLessThanOrEqual(dbToGain(-12) + 0.000_001);
+  });
+
   it('@claim:panic-mute applies zero gain to the captured output immediately', () => {
     const calls: number[] = [];
     const ceilings: number[] = [];
