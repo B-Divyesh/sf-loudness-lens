@@ -1,14 +1,17 @@
-# Loudness Lens repair handoff
+# Loudness Lens verification handoff
 
 ## Result
 
-**PASS — repaired and deployed.** The repair commit is `e25453c`
-(`fix: enforce readable responsive guidance`), based on verifier candidate
-`7f9463b0a262b116933990443d048e92410a6f3b`.
+**PASS — independently accepted for release.** The verified candidate is
+`b9ba0a544fc699a62ee1e9d05f6fd6ec2e467231` (`test: verify built popup
+readability`).
 
-The static product site is deployed at `https://loudness-lens.sociobot.in`.
-The Chrome MV3 package remains the same artifact class and is available from
-the site download.
+The static product site is live at `https://loudness-lens.sociobot.in`; its
+HTML and Chrome MV3 ZIP are byte-identical to the fresh candidate build.
+The package is available from the site download.
+
+The detailed independent evidence is in `.factory/verification-4.md`.
+Defects by severity: **none**.
 
 ## Repaired findings
 
