@@ -1,0 +1,2 @@
+350e06624579f53701258feb8534aed9c4f8d98c900b5dc1599948183050c52a  dist/site/downloads/loudness-lens-chrome-1.0.0.zip
+350e06624579f53701258feb8534aed9c4f8d98c900b5dc1599948183050c52a  /tmp/loudness-lens-polish-3-live.zip

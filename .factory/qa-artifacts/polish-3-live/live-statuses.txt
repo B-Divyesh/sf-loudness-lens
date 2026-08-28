@@ -1,0 +1,8 @@
+/ 200
+/demo 200
+/privacy 200
+/terms 200
+/robots.txt 200
+/sitemap.xml 200
+/downloads/loudness-lens-chrome-1.0.0.zip 200
+/missing 404

@@ -1,0 +1,24 @@
+clean_clone=/tmp/loudness-lens-polish-3-clean.1LtcR8/repo
+commit=748a1bf75235d5644b6c4057bd93132f78ed3091
+claims=18
+PASS local-only | npm run test:e2e -- --grep @claim:local-only
+PASS sample-limiter | npm run test:e2e -- --grep @claim:sample-limiter
+PASS sample-timing | npm run test:e2e -- --grep @claim:sample-timing
+PASS demo-isolation | npm run test:e2e -- --grep @claim:demo-isolation
+PASS demo-reset | npm run test:e2e -- --grep @claim:demo-reset
+PASS demo-discard | npm run test:e2e -- --grep @claim:demo-discard
+PASS free-download | npm run test:e2e -- --grep @claim:free-download
+PASS per-tab-peak-limit | npm run test:unit -- --testNamePattern @claim:per-tab-peak-limit
+PASS peak-limit-marker | npm run test:e2e -- --grep @claim:peak-limit-marker
+PASS tab-consent | npm run test:unit -- --testNamePattern @claim:tab-consent
+PASS panic-mute | npm run test:unit -- --testNamePattern @claim:panic-mute
+PASS look-ahead-limiter | npm run test:unit -- --testNamePattern @claim:look-ahead-limiter
+PASS live-meter | npm run test:unit -- --testNamePattern @claim:live-meter
+PASS level-trim | npm run test:unit -- --testNamePattern @claim:level-trim
+PASS capture-lifecycle | npm run test:unit -- --testNamePattern @claim:capture-lifecycle
+PASS local-settings | npm run test:unit -- --testNamePattern @claim:local-settings
+PASS capture-error | npm run test:unit -- --testNamePattern @claim:capture-error
+PASS minimum-chrome-version | npm run test:unit -- --testNamePattern @claim:minimum-chrome-version
+
+full_suite=54 passed (47.1s)
+audit=found 0 vulnerabilities

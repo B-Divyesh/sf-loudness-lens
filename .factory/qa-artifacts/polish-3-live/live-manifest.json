@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Loudness Lens",
+  "description": "Limit sudden peaks in the tab you enable.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabCapture",
+    "offscreen"
+  ],
+  "action": {
+    "default_title": "Loudness Lens — tab loudness guard",
+    "default_popup": "popup.html"
+  }
+}
